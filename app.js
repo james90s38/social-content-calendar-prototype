@@ -26,13 +26,15 @@ const items = [
   {title:'GTA Free Roam Test',account:'ai_marie_creator',status:'ready',date:'Aug 30',day:30,platforms:['Instagram','TikTok'],template:'Bahnschrift gameplay overlay',compliance:'Pass',hook:'This is the framing that feels like gameplay.',caption:'Third-person framing makes AI game footage feel more believable than cinematic angles. #gaming #ai #gta #video #creator',variants:['Gameplay Framing','This is the framing that feels like gameplay.'],img:'assets/thumbs/gta_seedance_top_overlay.jpg'},
   {title:'Caesar Rubicon Trap',account:'ai_marie_creator',status:'scheduled',date:'Sep 02',day:2,platforms:['X','Reddit'],template:'Default Hook Title v1',compliance:'Needs check',hook:'History is easier to remember as a trap.',caption:'Draft caption waiting for approval.',variants:['History As A Trap','History is easier to remember as a trap.'],img:'assets/thumbs/caesar_rubicon_trap.jpg'},
   {title:'Noki Prompt Below Title',account:'artprodesign.2023',status:'ready',date:'Sep 04',day:4,platforms:['Instagram'],template:'Prompt below title',compliance:'Failed',hook:'The prompt should not fight the image.',caption:'When the overlay is too busy, the viewer stops watching the video. #design #ai #videoediting #socialmedia #creator',variants:['Prompt Below Title','The prompt should not fight the image.'],img:'assets/thumbs/noki_prompt_below_title.jpg'},
-  {title:'Dragon Vertical Edit',account:'artprodesign.2023',status:'posted',date:'Aug 24',day:24,platforms:['TikTok','Pinterest'],template:'Default Hook Title v1',compliance:'Pass',hook:'Vertical crops decide the whole ad.',caption:'A good vertical crop keeps the subject, motion, and title readable at the same time. #tiktok #pinterest #video #design #ads',variants:['Vertical Crop Test','Vertical crops decide the whole ad.'],img:'assets/thumbs/dragons_rotated_vertical.jpg'}
+  {title:'Dragon Vertical Edit',account:'artprodesign.2023',status:'posted',date:'Aug 24',day:24,platforms:['TikTok','Pinterest'],template:'Default Hook Title v1',compliance:'Pass',hook:'Vertical crops decide the whole ad.',caption:'A good vertical crop keeps the subject, motion, and title readable at the same time. #tiktok #pinterest #video #design #ads',variants:['Vertical Crop Test','Vertical crops decide the whole ad.'],img:'assets/thumbs/dragons_rotated_vertical.jpg'},
+  {title:'Beauty Cut Draft',account:'mari_ken7',status:'edited',date:'Aug 29',day:29,platforms:['Instagram'],template:'Default Hook Title v1',compliance:'Needs check',hook:'Small hand movement sells the beauty shot.',caption:'Draft needs final caption approval before scheduling.',variants:['Beauty Cut Draft','Small hand movement sells the beauty shot.'],img:'assets/thumbs/lip_makeup_hook_aug25.jpg'},
+  {title:'Gameplay Title Approved',account:'ai_marie_creator',status:'approved',date:'Aug 31',day:31,platforms:['TikTok'],template:'Bahnschrift gameplay overlay',compliance:'Pass',hook:'Approved gameplay framing title.',caption:'Approved title; waiting for final posting slot.',variants:['Gameplay Framing','Approved gameplay framing title.'],img:'assets/thumbs/gta_seedance_top_overlay.jpg'}
 ];
 
 const templates = [
-  {title:'Why Does This Feel Real?', cta:'Read The Caption', img:'assets/thumbs/street_interview_hook_aug25.jpg', status:'Default approved hook-title template'},
-  {title:'Gameplay Framing', cta:'Read The Caption', img:'assets/thumbs/gta_seedance_top_overlay.jpg', status:'Bahnschrift gameplay overlay'},
-  {title:'Prompt Below Title', cta:'Review Caption', img:'assets/thumbs/noki_prompt_below_title.jpg', status:'Prompt-below-title variant'}
+  {title:'Why Does This Feel Real?', cta:'Read The Caption', img:'assets/thumbs/street_interview_hook_aug25.jpg', status:'Default approved hook-title template', versions:[{v:'v1', label:'Why does this feel real?', note:'Original draft title'}, {v:'v2', label:'Why does this feel like a real street interview?', note:'Approved current version'}]},
+  {title:'Gameplay Framing', cta:'Read The Caption', img:'assets/thumbs/gta_seedance_top_overlay.jpg', status:'Bahnschrift gameplay overlay', versions:[{v:'v1', label:'Gameplay Framing', note:'Short overlay version'}, {v:'v2', label:'This is the framing that feels like gameplay.', note:'Approved for GTA/open-world reels'}]},
+  {title:'Prompt Below Title', cta:'Review Caption', img:'assets/thumbs/noki_prompt_below_title.jpg', status:'Prompt-below-title variant', versions:[{v:'v1', label:'Prompt Below Title', note:'Initial layout test'}, {v:'v2', label:'The prompt should not fight the image.', note:'Needs review before reuse'}]}
 ];
 
 const state = { calendarStatus:'all', boardStatus:'all', calendarAccount:'all', boardAccount:'all', zoom:2, query:'', boardPage:1, boardPageSize:6, templatePage:1, calendarView:'month', weekIndex:0 };
@@ -65,6 +67,9 @@ const searchPopover = document.getElementById('searchPopover');
 const boardPagination = document.getElementById('boardPagination');
 const templatePagerSlot = document.getElementById('templatePagerSlot');
 const templatePagination = document.getElementById('templatePagination');
+const workflowBoard = document.getElementById('workflowBoard');
+const templateHistory = document.getElementById('templateHistory');
+const usageGrid = document.getElementById('usageGrid');
 const monthViewBtn = document.getElementById('monthViewBtn');
 const weekViewBtn = document.getElementById('weekViewBtn');
 const prevPeriod = document.getElementById('prevPeriod');
@@ -87,6 +92,34 @@ function accountLabel(account){ return account; }
 function accountHtml(account){ return `<span class="account-pill"><i class="fa-solid fa-user"></i>${accountLabel(account)}</span>`; }
 function platformNameHtml(a){return a.map(p=>`<span class="platform-name platform-${p.toLowerCase().replaceAll(' ','-')}"><i class="fa-brands fa-${platformMap[p] || 'circle'}"></i>${p}</span>`).join('');}
 function sectionItems(section){return items.filter(item => matchesQuery(item) && matchesStatus(item, section) && matchesAccount(item, section));}
+
+
+const workflowSteps = [
+  {key:'edited', label:'Edited', hint:'Needs approval'},
+  {key:'approved', label:'Approved', hint:'Safe to prepare'},
+  {key:'ready', label:'Ready to post', hint:'Caption checked'},
+  {key:'scheduled', label:'Scheduled', hint:'Date locked'},
+  {key:'posted', label:'Posted', hint:'History saved'}
+];
+function renderWorkflowBoard(){
+  workflowBoard.innerHTML = workflowSteps.map(step => {
+    const colItems = sectionItems('board').filter(item => item.status === step.key);
+    return `<section class="workflow-column workflow-${step.key}"><div class="workflow-head"><div><strong>${step.label}</strong><span>${step.hint}</span></div><em>${colItems.length}</em></div><div class="workflow-items">${colItems.map(item => `<button class="workflow-card" data-index="${items.indexOf(item)}"><img src="${item.img}" alt="${item.title}"><div><b>${item.title}</b><span>${accountLabel(item.account)}</span><div class="platforms">${platformHtml(item.platforms)}</div></div></button>`).join('') || '<p class="workflow-empty">No items</p>'}</div></section>`;
+  }).join('');
+}
+function renderTemplateHistory(template = templates[state.templatePage - 1]){
+  templateHistory.innerHTML = `<div class="history-card"><p class="eyebrow">Version history</p><h3>${template.title}</h3><ol class="version-list">${template.versions.map((entry, idx) => `<li class="${idx === template.versions.length - 1 ? 'current' : ''}"><span>${entry.v}</span><div><strong>${entry.label}</strong><p>${entry.note}</p></div></li>`).join('')}</ol></div>`;
+}
+function renderUsageHistory(){
+  const accounts = [...new Set(items.map(item => item.account))];
+  usageGrid.innerHTML = accounts.map(account => {
+    const accountItems = items.filter(item => item.account === account);
+    const usedPlatforms = [...new Set(accountItems.flatMap(item => item.platforms))];
+    const posted = accountItems.filter(item => item.status === 'posted').length;
+    const upcoming = accountItems.filter(item => item.status !== 'posted').length;
+    return `<article class="usage-card"><div class="usage-head"><strong>${account}</strong><span>${posted} posted · ${upcoming} upcoming</span></div><div class="platform-name-row">${platformNameHtml(usedPlatforms)}</div><ul>${accountItems.slice(0,4).map(item => `<li><span class="dot ${item.status}"></span><b>${statusLabel(item.status)}</b><em>${item.date}</em><p>${item.title}</p></li>`).join('')}</ul></article>`;
+  }).join('');
+}
 
 function renderCards(){
   const filtered = sectionItems('board');
@@ -126,6 +159,7 @@ function renderTemplatePager(){
   const t = templates[state.templatePage - 1];
   templatePagerSlot.innerHTML = `<button class="template-preview-card" id="templatePreviewCard" aria-label="Open template details popup"><div class="template-phone"><div class="template-title">${t.title}</div><img src="${t.img}" alt="${t.title} template preview"><div class="template-cta">${t.cta}</div></div></button>`;
   templatePagination.innerHTML = paginationHtml('template', state.templatePage, totalPages, totalPages);
+  renderTemplateHistory(t);
   document.getElementById('templatePreviewCard').addEventListener('click', () => renderTemplateDetail(t));
 }
 function renderCalendar(){
@@ -173,9 +207,9 @@ function renderDayDetail(day){
   openModal(`<p class="eyebrow">Calendar day</p><h2>Day ${day}</h2><div class="day-modal-grid">${dayItems.length ? dayItems.map(item => `<article class="day-modal-item"><img src="${item.img}" alt="${item.title}"><div><strong>${item.title}</strong><span>${statusLabel(item.status)} · ${item.date}</span><div class="platforms platform-name-row">${platformNameHtml(item.platforms)}${accountHtml(item.account)}</div><p>${item.hook}</p></div></article>`).join('') : '<p class="empty-state">No items on this day for the current filter.</p>'}</div>`);
 }
 function renderTemplateDetail(template = templates[state.templatePage - 1]){
-  openModal(`<p class="eyebrow">Approved template</p><h2>${template.title}</h2><img class="detail-img" src="${template.img}" alt="${template.title} preview"><div class="detail-section"><h4>Template status</h4><p>${template.status}</p></div><div class="detail-section"><h4>Use rule</h4><p>This is the locked default style unless a new direction is explicitly approved.</p></div>`);
+  openModal(`<p class="eyebrow">Approved template</p><h2>${template.title}</h2><img class="detail-img" src="${template.img}" alt="${template.title} preview"><div class="detail-section"><h4>Template status</h4><p>${template.status}</p></div><div class="detail-section"><h4>Version history</h4><ol class="version-list modal-version-list">${template.versions.map((entry, idx) => `<li class="${idx === template.versions.length - 1 ? 'current' : ''}"><span>${entry.v}</span><div><strong>${entry.label}</strong><p>${entry.note}</p></div></li>`).join('')}</ol></div><div class="detail-section"><h4>Use rule</h4><p>This is the locked default style unless a new direction is explicitly approved.</p></div>`);
 }
-function rerender(){state.boardPage=1;renderCards();renderCalendar();renderTemplatePager();}
+function rerender(){state.boardPage=1;renderWorkflowBoard();renderCards();renderCalendar();renderTemplatePager();renderUsageHistory();}
 function setZoom(next){ state.zoom = Math.max(0, Math.min(4, next)); renderCalendar(); }
 function setCalendarView(view){ state.calendarView = view; renderCalendar(); }
 function shiftPeriod(delta){ if (state.calendarView === 'week') state.weekIndex = Math.max(0, Math.min(totalWeeks - 1, state.weekIndex + delta)); renderCalendar(); }
@@ -185,14 +219,14 @@ function closeMobileSidebar(){ document.body.classList.remove('mobile-sidebar-op
 function toggleSidebar(){ isMobileNav() ? openMobileSidebar() : document.body.classList.toggle('sidebar-collapsed'); }
 
 if (window.matchMedia('(max-width: 760px)').matches) state.calendarView = 'week';
-renderCards(); renderCalendar(); renderTemplatePager();
+renderWorkflowBoard(); renderCards(); renderCalendar(); renderTemplatePager(); renderUsageHistory();
 searchInput.addEventListener('input', () => { state.query = searchInput.value; rerender(); });
 searchToggle.addEventListener('click', () => { searchPopover.classList.toggle('open'); if (searchPopover.classList.contains('open')) searchInput.focus(); });
 document.addEventListener('click', e => { if (!searchPopover.contains(e.target)) searchPopover.classList.remove('open'); });
 calendarStatusFilter.addEventListener('change', () => { state.calendarStatus = calendarStatusFilter.value; renderCalendar(); });
-boardStatusFilter.addEventListener('change', () => { state.boardStatus = boardStatusFilter.value; state.boardPage = 1; renderCards(); });
+boardStatusFilter.addEventListener('change', () => { state.boardStatus = boardStatusFilter.value; state.boardPage = 1; renderWorkflowBoard(); renderCards(); });
 calendarAccountFilter.addEventListener('change', () => { state.calendarAccount = calendarAccountFilter.value; renderCalendar(); });
-boardAccountFilter.addEventListener('change', () => { state.boardAccount = boardAccountFilter.value; state.boardPage = 1; renderCards(); });
+boardAccountFilter.addEventListener('change', () => { state.boardAccount = boardAccountFilter.value; state.boardPage = 1; renderWorkflowBoard(); renderCards(); });
 boardPagination.addEventListener('click', e => { const b=e.target.closest('[data-page-action]'); if(!b) return; state.boardPage += b.dataset.pageAction === 'next' ? 1 : -1; renderCards(); });
 templatePagination.addEventListener('click', e => { const b=e.target.closest('[data-page-action]'); if(!b) return; state.templatePage += b.dataset.pageAction === 'next' ? 1 : -1; renderTemplatePager(); });
 monthViewBtn.addEventListener('click', () => setCalendarView('month'));
@@ -203,6 +237,7 @@ document.getElementById('zoomOut').addEventListener('click', () => setZoom(state
 document.getElementById('zoomIn').addEventListener('click', () => setZoom(state.zoom + 1));
 document.getElementById('calendarExpand').addEventListener('click', async () => { if (document.fullscreenElement) await document.exitFullscreen(); else await calendarPanel.requestFullscreen(); });
 contentCards.addEventListener('click', e => { const card=e.target.closest('.content-card'); if(card) renderItemDetail(items[Number(card.dataset.index)]); });
+workflowBoard.addEventListener('click', e => { const card=e.target.closest('.workflow-card'); if(card) renderItemDetail(items[Number(card.dataset.index)]); });
 calendarGrid.addEventListener('click', e => { const day=e.target.closest('.day'); if(day) renderDayDetail(Number(day.dataset.day)); });
 modalClose.addEventListener('click', closeModal);
 modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });

@@ -76,6 +76,8 @@
                 <span>Calendar status</span>
                 <select id="calendarStatusFilter">
                   <option value="all">All</option>
+                  <option value="edited">Edited</option>
+                  <option value="approved">Approved</option>
                   <option value="ready">Ready To Post</option>
                   <option value="scheduled">Scheduled</option>
                   <option value="posted">Posted</option>
@@ -112,16 +114,28 @@
       <section class="panel" id="board">
         <div class="panel-head">
           <div><p class="eyebrow">Board / list view</p><h2>Visual content cards</h2></div>
-          <div class="board-controls"><label class="filter-select section-filter"><span>Board status</span><select id="boardStatusFilter"><option value="all">All</option><option value="ready">Ready To Post</option><option value="scheduled">Scheduled</option><option value="posted">Posted</option></select></label><label class="filter-select section-filter"><span>Account</span><select id="boardAccountFilter"><option value="all">All accounts</option><option value="mari_ken7">mari_ken7</option><option value="ai_marie_creator">ai_marie_creator</option><option value="artprodesign.2023">artprodesign.2023</option></select></label><div class="view-tabs"><button class="active">Board</button><button>List</button></div></div>
+          <div class="board-controls"><label class="filter-select section-filter"><span>Board status</span><select id="boardStatusFilter"><option value="all">All</option><option value="edited">Edited</option><option value="approved">Approved</option><option value="ready">Ready To Post</option><option value="scheduled">Scheduled</option><option value="posted">Posted</option></select></label><label class="filter-select section-filter"><span>Account</span><select id="boardAccountFilter"><option value="all">All accounts</option><option value="mari_ken7">mari_ken7</option><option value="ai_marie_creator">ai_marie_creator</option><option value="artprodesign.2023">artprodesign.2023</option></select></label><div class="view-tabs"><button class="active">Board</button><button>List</button></div></div>
         </div>
+        <div class="workflow-board" id="workflowBoard" aria-label="Status workflow columns"></div>
+        <div class="section-subhead"><div><p class="eyebrow">Paged cards</p><h3>All content details</h3></div></div>
         <div class="cards-grid" id="contentCards"></div>
         <div class="pagination-row" id="boardPagination" aria-label="Board pagination"></div>
       </section>
 
       <section class="panel template-panel" id="templates">
         <div class="panel-head"><div><p class="eyebrow">Template tracking</p><h2>Approved title template</h2></div></div>
-        <div id="templatePagerSlot"></div>
-        <div class="pagination-row compact-pagination" id="templatePagination" aria-label="Template pagination"></div>
+        <div class="template-layout">
+          <div>
+            <div id="templatePagerSlot"></div>
+            <div class="pagination-row compact-pagination" id="templatePagination" aria-label="Template pagination"></div>
+          </div>
+          <div class="template-history" id="templateHistory" aria-label="Template version history"></div>
+        </div>
+      </section>
+
+      <section class="panel usage-panel" id="posted">
+        <div class="panel-head"><div><p class="eyebrow">Usage history</p><h2>Platform / account history</h2></div></div>
+        <div class="usage-grid" id="usageGrid" aria-label="Platform and account usage history"></div>
       </section>
     </main>
   </div>
