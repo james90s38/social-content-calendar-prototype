@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Social Content Calendar Prototype</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Workspace navigation">
+      <div class="brand">
+        <div class="brand-mark">CC</div>
+        <div>
+          <strong>Content Calendar</strong>
+          <span>Command center</span>
+        </div>
+      </div>
+
+      <nav class="nav-list">
+        <a class="active" href="#overview">Overview</a>
+        <a href="#calendar">Calendar</a>
+        <a href="#board">Board</a>
+        <a href="#posted">Posted library</a>
+        <a href="#templates">Templates</a>
+      </nav>
+
+      <div class="rule-card">
+        <span class="rule-dot"></span>
+        <p><strong>Operational rule</strong><br/>Nothing gets posted or scheduled until it is explicitly approved.</p>
+      </div>
+
+      <div class="mini-stack">
+        <span class="mini-label">Quick answer</span>
+        <button data-filter="ready" class="quick-filter">What is ready?</button>
+        <button data-filter="approved" class="quick-filter">Approved only</button>
+        <button data-filter="scheduled" class="quick-filter">Scheduled</button>
+        <button data-filter="posted" class="quick-filter">Posted</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="hero" id="overview">
+        <div>
+          <p class="eyebrow">Prototype v1 / static HTML + CSS</p>
+          <h1>Know what goes out next — without confusing edited, approved, ready, scheduled, and posted.</h1>
+          <p class="hero-copy">A visual social content calendar for short-form videos, previews, captions, hook titles, templates, platform status, and posting history.</p>
+        </div>
+        <div class="hero-actions">
+          <button class="primary">Add draft video</button>
+          <button class="secondary">Export schedule</button>
+        </div>
+      </header>
+
+      <section class="metrics" aria-label="Content status summary">
+        <article><span>Ready now</span><strong>7</strong><small>2 need final caption check</small></article>
+        <article><span>Approved</span><strong>11</strong><small>Clearly separated from drafts</small></article>
+        <article><span>Scheduled</span><strong>5</strong><small>Next 7 days</small></article>
+        <article><span>Posted</span><strong>24</strong><small>IG / TikTok / X / Reddit / Pinterest</small></article>
+      </section>
+
+      <section class="toolbar" aria-label="Filters">
+        <div class="search-wrap">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="Search by video, hook, caption, template, platform..." />
+        </div>
+        <div class="chips" role="list" aria-label="Status filters">
+          <button class="chip active" data-status="all">All</button>
+          <button class="chip" data-status="edited">Edited</button>
+          <button class="chip" data-status="approved">Approved</button>
+          <button class="chip" data-status="ready">Ready</button>
+          <button class="chip" data-status="scheduled">Scheduled</button>
+          <button class="chip" data-status="posted">Posted</button>
+        </div>
+      </section>
+
+      <section class="split-grid">
+        <section class="panel calendar-panel" id="calendar">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Calendar</p>
+              <h2>August posting map</h2>
+            </div>
+            <div class="month-switch"><button>‹</button><strong>Aug 2026</strong><button>›</button></div>
+          </div>
+          <div class="calendar-grid" id="calendarGrid" aria-label="Monthly calendar"></div>
+        </section>
+
+        <aside class="panel next-panel">
+          <div class="panel-head compact">
+            <div>
+              <p class="eyebrow">Next up</p>
+              <h2>Recommended queue</h2>
+            </div>
+          </div>
+          <ol class="queue-list">
+            <li><span class="queue-rank">1</span><div><strong>AI Agent Mistakes</strong><small>IG + TikTok · approved · use tomorrow</small></div></li>
+            <li><span class="queue-rank">2</span><div><strong>Prompt Hook Test</strong><small>X + Reddit · needs title variant pick</small></div></li>
+            <li><span class="queue-rank">3</span><div><strong>Automation Calendar</strong><small>Pinterest idea pin · not approved yet</small></div></li>
+          </ol>
+        </aside>
+      </section>
+
+      <section class="panel" id="board">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Board / List View</p>
+            <h2>Visual content cards</h2>
+          </div>
+          <div class="view-toggle" aria-label="View switch">
+            <button class="active">Board</button><button>List</button>
+          </div>
+        </div>
+        <div class="cards-grid" id="contentCards"></div>
+      </section>
+
+      <section class="panel template-panel" id="templates">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Approved template tracking</p>
+            <h2>Hook-title template compliance</h2>
+          </div>
+        </div>
+        <div class="template-row">
+          <div class="template-preview">
+            <div class="phone-frame">
+              <div class="phone-title">You Are Losing Views Here</div>
+              <div class="phone-video">Video Preview</div>
+              <div class="phone-caption">Read The Caption</div>
+            </div>
+          </div>
+          <div class="template-copy">
+            <span class="status-pill good">Default approved template</span>
+            <h3>Black background hook card</h3>
+            <p>Rounded inset video, title case hook, clean spacing, larger “Read The Caption”. Each video card can show whether it follows this default template.</p>
+            <ul>
+              <li>Template used: Default Hook Title v1</li>
+              <li>Compliance: pass / needs check / failed</li>
+              <li>Variant history: Hook A → Hook B → Approved Hook</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-card">
+      <button class="drawer-close" id="drawerClose">×</button>
+      <div id="drawerContent"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
