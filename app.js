@@ -17,7 +17,7 @@ const icons = {
 };
 document.querySelectorAll('[data-icon]').forEach(el => { el.innerHTML = icons[el.dataset.icon] || ''; });
 
-const platformMap = {Instagram:'IG', TikTok:'TT', Pinterest:'PI', X:'X', Reddit:'RD'};
+const platformMap = {Instagram:'instagram', TikTok:'tiktok', Pinterest:'pinterest-p', X:'x-twitter', Reddit:'reddit-alien'};
 const items = [
   {title:'Street Interview Hook',account:'mari_ken7',status:'ready',date:'Aug 28',day:28,platforms:['Instagram','TikTok'],template:'Default Hook Title v1',compliance:'Pass',hook:'Why does this feel like a real street interview?',caption:'Realism comes from camera distance, natural pauses, and imperfect street audio. #ai #video #creator #socialmedia #filmmaking',variants:['Why does this feel real?','Why does this feel like a real street interview?'],img:'assets/thumbs/street_interview_hook_aug25.jpg'},
   {title:'Lip Makeup Hook',account:'mari_ken7',status:'ready',date:'Aug 28',day:28,platforms:['Instagram','TikTok'],template:'Default Hook Title v1',compliance:'Pass',hook:'The face detail makes or breaks beauty AI.',caption:'For beauty clips, texture, lighting, and small hand movements matter more than a flashy prompt. #beauty #ai #video #makeup #creator',variants:['Beauty AI Needs Detail','The face detail makes or breaks beauty AI.'],img:'assets/thumbs/lip_makeup_hook_aug25.jpg'},
@@ -30,8 +30,8 @@ const items = [
 ];
 
 const state = { calendarStatus:'all', boardStatus:'all', calendarAccount:'all', boardAccount:'all', zoom:2, query:'' };
-const zoomNames = ['Compact', 'Comfort', 'Focus', 'Focus+'];
-const zoomClasses = ['zoom-compact', 'zoom-comfort', 'zoom-focus', 'zoom-ultra'];
+const zoomNames = ['Compact', 'Comfort', 'Roomy', 'Focus', 'Focus+'];
+const zoomClasses = ['zoom-compact', 'zoom-comfort', 'zoom-roomy', 'zoom-focus', 'zoom-ultra'];
 const calendarDays = [27,28,29,30,31,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
 const dayNames = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 
@@ -53,7 +53,7 @@ const searchToggle = document.getElementById('searchToggle');
 const searchPopover = document.getElementById('searchPopover');
 
 function cls(v){return v === 'Pass' ? '' : v === 'Needs check' ? 'warn' : 'bad';}
-function platformHtml(a){return a.map(p=>`<span class="platform platform-${p.toLowerCase().replaceAll(' ','-')}">${platformMap[p] || p}</span>`).join('');}
+function platformHtml(a){return a.map(p=>`<span class="platform platform-${p.toLowerCase().replaceAll(' ','-')}" title="${p}" aria-label="${p}"><i class="fa-brands fa-${platformMap[p] || 'circle'}"></i></span>`).join('');}
 function statusLabel(status){return status === 'ready' ? 'Ready To Post' : status[0].toUpperCase() + status.slice(1);}
 function matchesQuery(item){return JSON.stringify(item).toLowerCase().includes(state.query.toLowerCase());}
 function matchesStatus(item, section){
@@ -127,7 +127,7 @@ function renderTemplateDetail(){
   openModal(`<p class="eyebrow">Approved template</p><h2>Black background title template</h2><img class="detail-img" src="assets/thumbs/street_interview_hook_aug25.jpg" alt="Approved template preview"><div class="detail-section"><h4>Layout</h4><p>Black background, rounded-corner inset video, title above the video, and “Read The Caption” below.</p></div><div class="detail-section"><h4>Use rule</h4><p>This is the locked default style unless a new direction is explicitly approved.</p></div>`);
 }
 function rerender(){renderCards();renderCalendar();}
-function setZoom(next){ state.zoom = Math.max(0, Math.min(3, next)); renderCalendar(); }
+function setZoom(next){ state.zoom = Math.max(0, Math.min(4, next)); renderCalendar(); }
 function toggleSidebar(){ document.body.classList.toggle('sidebar-collapsed'); }
 
 renderCards(); renderCalendar();
