@@ -29,7 +29,13 @@ const items = [
   {title:'Dragon Vertical Edit',account:'artprodesign.2023',status:'posted',date:'Aug 24',day:24,platforms:['TikTok','Pinterest'],template:'Default Hook Title v1',compliance:'Pass',hook:'Vertical crops decide the whole ad.',caption:'A good vertical crop keeps the subject, motion, and title readable at the same time. #tiktok #pinterest #video #design #ads',variants:['Vertical Crop Test','Vertical crops decide the whole ad.'],img:'assets/thumbs/dragons_rotated_vertical.jpg'}
 ];
 
-const state = { calendarStatus:'all', boardStatus:'all', calendarAccount:'all', boardAccount:'all', zoom:2, query:'' };
+const templates = [
+  {title:'Why Does This Feel Real?', cta:'Read The Caption', img:'assets/thumbs/street_interview_hook_aug25.jpg', status:'Default approved hook-title template'},
+  {title:'Gameplay Framing', cta:'Read The Caption', img:'assets/thumbs/gta_seedance_top_overlay.jpg', status:'Bahnschrift gameplay overlay'},
+  {title:'Prompt Below Title', cta:'Review Caption', img:'assets/thumbs/noki_prompt_below_title.jpg', status:'Prompt-below-title variant'}
+];
+
+const state = { calendarStatus:'all', boardStatus:'all', calendarAccount:'all', boardAccount:'all', zoom:2, query:'', boardPage:1, boardPageSize:6, templatePage:1 };
 const zoomNames = ['Compact', 'Comfort', 'Roomy', 'Focus', 'Focus+'];
 const zoomClasses = ['zoom-compact', 'zoom-comfort', 'zoom-roomy', 'zoom-focus', 'zoom-ultra'];
 const calendarDays = [27,28,29,30,31,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
@@ -45,12 +51,17 @@ const modalContent = document.getElementById('modalContent');
 const modalClose = document.getElementById('modalClose');
 const sidebarToggle = document.getElementById('sidebarToggle');
 const mobileSidebarToggle = document.getElementById('mobileSidebarToggle');
+const mobileSidebarClose = document.getElementById('mobileSidebarClose');
+const sidebarBackdrop = document.getElementById('sidebarBackdrop');
 const calendarStatusFilter = document.getElementById('calendarStatusFilter');
 const boardStatusFilter = document.getElementById('boardStatusFilter');
 const calendarAccountFilter = document.getElementById('calendarAccountFilter');
 const boardAccountFilter = document.getElementById('boardAccountFilter');
 const searchToggle = document.getElementById('searchToggle');
 const searchPopover = document.getElementById('searchPopover');
+const boardPagination = document.getElementById('boardPagination');
+const templatePagerSlot = document.getElementById('templatePagerSlot');
+const templatePagination = document.getElementById('templatePagination');
 
 function cls(v){return v === 'Pass' ? '' : v === 'Needs check' ? 'warn' : 'bad';}
 function platformHtml(a){return a.map(p=>`<span class="platform platform-${p.toLowerCase().replaceAll(' ','-')}" title="${p}" aria-label="${p}"><i class="fa-brands fa-${platformMap[p] || 'circle'}"></i></span>`).join('');}
@@ -70,8 +81,13 @@ function platformNameHtml(a){return a.map(p=>`<span class="platform-name platfor
 function sectionItems(section){return items.filter(item => matchesQuery(item) && matchesStatus(item, section) && matchesAccount(item, section));}
 
 function renderCards(){
+  const filtered = sectionItems('board');
+  const totalPages = Math.max(1, Math.ceil(filtered.length / state.boardPageSize));
+  state.boardPage = Math.min(state.boardPage, totalPages);
+  const start = (state.boardPage - 1) * state.boardPageSize;
+  const pageItems = filtered.slice(start, start + state.boardPageSize);
   contentCards.innerHTML = '';
-  sectionItems('board').forEach(it => {
+  pageItems.forEach(it => {
     const idx = items.indexOf(it);
     contentCards.insertAdjacentHTML('beforeend', `
       <article class="content-card" data-index="${idx}">
@@ -89,8 +105,21 @@ function renderCards(){
         </button>
       </article>`);
   });
+  boardPagination.innerHTML = paginationHtml('board', state.boardPage, totalPages, filtered.length);
 }
 
+function paginationHtml(type, page, totalPages, totalItems){
+  return `<button class="page-button" data-page-action="prev" data-page-type="${type}" ${page<=1?'disabled':''}>‹</button><span class="page-status">Page ${page} of ${totalPages} · ${totalItems} item${totalItems===1?'':'s'}</span><button class="page-button" data-page-action="next" data-page-type="${type}" ${page>=totalPages?'disabled':''}>›</button>`;
+}
+
+function renderTemplatePager(){
+  const totalPages = templates.length;
+  state.templatePage = Math.min(Math.max(1, state.templatePage), totalPages);
+  const t = templates[state.templatePage - 1];
+  templatePagerSlot.innerHTML = `<button class="template-preview-card" id="templatePreviewCard" aria-label="Open template details popup"><div class="template-phone"><div class="template-title">${t.title}</div><img src="${t.img}" alt="${t.title} template preview"><div class="template-cta">${t.cta}</div></div></button>`;
+  templatePagination.innerHTML = paginationHtml('template', state.templatePage, totalPages, totalPages);
+  document.getElementById('templatePreviewCard').addEventListener('click', () => renderTemplateDetail(t));
+}
 function renderCalendar(){
   calendarGrid.className = `calendar-grid ${zoomClasses[state.zoom]}`;
   calendarGrid.innerHTML = '';
@@ -124,29 +153,37 @@ function renderDayDetail(day){
   if (dayItems.length === 1) return renderItemDetail(dayItems[0]);
   openModal(`<p class="eyebrow">Calendar day</p><h2>Day ${day}</h2><div class="day-modal-grid">${dayItems.length ? dayItems.map(item => `<article class="day-modal-item"><img src="${item.img}" alt="${item.title}"><div><strong>${item.title}</strong><span>${statusLabel(item.status)} · ${item.date}</span><div class="platforms platform-name-row">${platformNameHtml(item.platforms)}${accountHtml(item.account)}</div><p>${item.hook}</p></div></article>`).join('') : '<p class="empty-state">No items on this day for the current filter.</p>'}</div>`);
 }
-function renderTemplateDetail(){
-  openModal(`<p class="eyebrow">Approved template</p><h2>Black background title template</h2><img class="detail-img" src="assets/thumbs/street_interview_hook_aug25.jpg" alt="Approved template preview"><div class="detail-section"><h4>Layout</h4><p>Black background, rounded-corner inset video, title above the video, and “Read The Caption” below.</p></div><div class="detail-section"><h4>Use rule</h4><p>This is the locked default style unless a new direction is explicitly approved.</p></div>`);
+function renderTemplateDetail(template = templates[state.templatePage - 1]){
+  openModal(`<p class="eyebrow">Approved template</p><h2>${template.title}</h2><img class="detail-img" src="${template.img}" alt="${template.title} preview"><div class="detail-section"><h4>Template status</h4><p>${template.status}</p></div><div class="detail-section"><h4>Use rule</h4><p>This is the locked default style unless a new direction is explicitly approved.</p></div>`);
 }
-function rerender(){renderCards();renderCalendar();}
+function rerender(){state.boardPage=1;renderCards();renderCalendar();renderTemplatePager();}
 function setZoom(next){ state.zoom = Math.max(0, Math.min(4, next)); renderCalendar(); }
-function toggleSidebar(){ document.body.classList.toggle('sidebar-collapsed'); }
+function isMobileNav(){ return window.matchMedia('(max-width: 1180px)').matches; }
+function openMobileSidebar(){ document.body.classList.add('mobile-sidebar-open'); }
+function closeMobileSidebar(){ document.body.classList.remove('mobile-sidebar-open'); }
+function toggleSidebar(){ isMobileNav() ? openMobileSidebar() : document.body.classList.toggle('sidebar-collapsed'); }
 
-renderCards(); renderCalendar();
+renderCards(); renderCalendar(); renderTemplatePager();
 searchInput.addEventListener('input', () => { state.query = searchInput.value; rerender(); });
 searchToggle.addEventListener('click', () => { searchPopover.classList.toggle('open'); if (searchPopover.classList.contains('open')) searchInput.focus(); });
 document.addEventListener('click', e => { if (!searchPopover.contains(e.target)) searchPopover.classList.remove('open'); });
 calendarStatusFilter.addEventListener('change', () => { state.calendarStatus = calendarStatusFilter.value; renderCalendar(); });
-boardStatusFilter.addEventListener('change', () => { state.boardStatus = boardStatusFilter.value; renderCards(); });
+boardStatusFilter.addEventListener('change', () => { state.boardStatus = boardStatusFilter.value; state.boardPage = 1; renderCards(); });
 calendarAccountFilter.addEventListener('change', () => { state.calendarAccount = calendarAccountFilter.value; renderCalendar(); });
-boardAccountFilter.addEventListener('change', () => { state.boardAccount = boardAccountFilter.value; renderCards(); });
+boardAccountFilter.addEventListener('change', () => { state.boardAccount = boardAccountFilter.value; state.boardPage = 1; renderCards(); });
+boardPagination.addEventListener('click', e => { const b=e.target.closest('[data-page-action]'); if(!b) return; state.boardPage += b.dataset.pageAction === 'next' ? 1 : -1; renderCards(); });
+templatePagination.addEventListener('click', e => { const b=e.target.closest('[data-page-action]'); if(!b) return; state.templatePage += b.dataset.pageAction === 'next' ? 1 : -1; renderTemplatePager(); });
 document.getElementById('zoomOut').addEventListener('click', () => setZoom(state.zoom - 1));
 document.getElementById('zoomIn').addEventListener('click', () => setZoom(state.zoom + 1));
 document.getElementById('calendarExpand').addEventListener('click', async () => { if (document.fullscreenElement) await document.exitFullscreen(); else await calendarPanel.requestFullscreen(); });
 contentCards.addEventListener('click', e => { const card=e.target.closest('.content-card'); if(card) renderItemDetail(items[Number(card.dataset.index)]); });
 calendarGrid.addEventListener('click', e => { const day=e.target.closest('.day'); if(day) renderDayDetail(Number(day.dataset.day)); });
-document.getElementById('templatePreviewCard').addEventListener('click', renderTemplateDetail);
 modalClose.addEventListener('click', closeModal);
 modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
 sidebarToggle.addEventListener('click', toggleSidebar);
-mobileSidebarToggle.addEventListener('click', toggleSidebar);
+mobileSidebarToggle.addEventListener('click', openMobileSidebar);
+mobileSidebarClose.addEventListener('click', closeMobileSidebar);
+sidebarBackdrop.addEventListener('click', closeMobileSidebar);
+document.querySelectorAll('.nav-list a').forEach(link => link.addEventListener('click', () => { if (isMobileNav()) closeMobileSidebar(); }));
+window.addEventListener('resize', () => { if (!isMobileNav()) closeMobileSidebar(); });

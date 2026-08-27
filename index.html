@@ -21,6 +21,7 @@
         <button class="icon-button sidebar-toggle desktop-only" id="sidebarToggle" title="Collapse sidebar" aria-label="Collapse sidebar">
           <i data-icon="panel"></i>
         </button>
+        <button class="icon-button sidebar-close mobile-only" id="mobileSidebarClose" title="Close sidebar" aria-label="Close sidebar">×</button>
       </div>
 
       <nav class="nav-list">
@@ -33,6 +34,7 @@
       </nav>
 
     </aside>
+    <button class="sidebar-backdrop" id="sidebarBackdrop" aria-label="Close sidebar overlay"></button>
 
     <main class="main" id="overview">
       <header class="app-topbar">
@@ -109,17 +111,13 @@
           <div class="board-controls"><label class="filter-select section-filter"><span>Board status</span><select id="boardStatusFilter"><option value="all">All</option><option value="ready">Ready To Post</option><option value="scheduled">Scheduled</option><option value="posted">Posted</option></select></label><label class="filter-select section-filter"><span>Account</span><select id="boardAccountFilter"><option value="all">All accounts</option><option value="mari_ken7">mari_ken7</option><option value="ai_marie_creator">ai_marie_creator</option><option value="artprodesign.2023">artprodesign.2023</option></select></label><div class="view-tabs"><button class="active">Board</button><button>List</button></div></div>
         </div>
         <div class="cards-grid" id="contentCards"></div>
+        <div class="pagination-row" id="boardPagination" aria-label="Board pagination"></div>
       </section>
 
       <section class="panel template-panel" id="templates">
         <div class="panel-head"><div><p class="eyebrow">Template tracking</p><h2>Approved title template</h2></div></div>
-        <button class="template-preview-card" id="templatePreviewCard" aria-label="Open template details popup">
-          <div class="template-phone">
-            <div class="template-title">Why Does This Feel Real?</div>
-            <img src="assets/thumbs/street_interview_hook_aug25.jpg" alt="Template preview with real video still">
-            <div class="template-cta">Read The Caption</div>
-          </div>
-        </button>
+        <div id="templatePagerSlot"></div>
+        <div class="pagination-row compact-pagination" id="templatePagination" aria-label="Template pagination"></div>
       </section>
     </main>
   </div>
