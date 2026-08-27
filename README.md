@@ -1,23 +1,29 @@
 # Social Content Calendar Prototype
 
-Static HTML/CSS/JS prototype for a social content command center.
+Static GitHub Pages prototype for a social content command center.
 
-## Goal
-Prototype the design first before building the complete project.
+## Current direction
 
-The UI tracks:
-- edited / approved / ready / scheduled / posted
-- image preview / first frame
-- date and platform badges
-- caption and hook title
-- template used and whether it follows the approved template
+The design was updated toward the provided Dribbble SaaS dashboard reference:
+- white dashboard surfaces instead of the earlier cream palette
+- soft light-blue app background inside a purple gradient stage
+- rounded white cards, light borders, subtle shadows
+- compact line icons and purple active navigation
+- real video preview thumbnails extracted from the existing approved/social media assets
+
+## Prototype features
+
+- calendar view with an image-preview toggle
+- calendar zoom controls: Compact / Comfort / Focus, inspired by Apple Calendar density changes
+- visual cards with real preview frames
+- status badges: edited / approved / ready / scheduled / posted
+- platform badges
+- caption + hook tracking
+- template compliance
 - title variant history
 
 ## Open-source projects found for later full build
 
-Good candidates to study or self-host later:
-- Postiz: https://github.com/gitroomhq/postiz-app — popular open-source social scheduler, but heavier/full app.
-- Free AI Social Media Scheduler: https://github.com/Anil-matcha/Free-AI-Social-Media-Scheduler — Next.js scheduler idea.
-- TryPost: https://github.com/trypostit/trypost — Laravel/Vue scheduler.
-
-For this first step, this repo is intentionally a lightweight static GitHub Pages prototype so the design can be approved before the full product is built.
+- Postiz: https://github.com/gitroomhq/postiz-app
+- Free AI Social Media Scheduler: https://github.com/Anil-matcha/Free-AI-Social-Media-Scheduler
+- TryPost: https://github.com/trypostit/trypost
