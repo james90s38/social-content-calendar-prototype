@@ -49,6 +49,8 @@ const calendarStatusFilter = document.getElementById('calendarStatusFilter');
 const boardStatusFilter = document.getElementById('boardStatusFilter');
 const calendarAccountFilter = document.getElementById('calendarAccountFilter');
 const boardAccountFilter = document.getElementById('boardAccountFilter');
+const searchToggle = document.getElementById('searchToggle');
+const searchPopover = document.getElementById('searchPopover');
 
 function cls(v){return v === 'Pass' ? '' : v === 'Needs check' ? 'warn' : 'bad';}
 function platformHtml(a){return a.map(p=>`<span class="platform platform-${p.toLowerCase().replaceAll(' ','-')}">${platformMap[p] || p}</span>`).join('');}
@@ -79,10 +81,9 @@ function renderCards(){
             <div class="platforms">${platformHtml(it.platforms)}${accountHtml(it.account)}</div>
             <div class="meta">
               <span><strong>Hook:</strong> ${it.hook}</span>
-              <span><strong>Template:</strong> ${it.template}</span>
               <span><strong>Caption:</strong> ${it.caption.slice(0, 82)}...</span>
             </div>
-            <div class="card-actions"><span class="compliance ${cls(it.compliance)}">Template: ${it.compliance}</span><span class="open-detail">Details</span></div>
+            <div class="card-actions card-actions-right"><span class="open-detail">Details</span></div>
           </div>
         </button>
       </article>`);
@@ -131,6 +132,8 @@ function toggleSidebar(){ document.body.classList.toggle('sidebar-collapsed'); }
 
 renderCards(); renderCalendar();
 searchInput.addEventListener('input', () => { state.query = searchInput.value; rerender(); });
+searchToggle.addEventListener('click', () => { searchPopover.classList.toggle('open'); if (searchPopover.classList.contains('open')) searchInput.focus(); });
+document.addEventListener('click', e => { if (!searchPopover.contains(e.target)) searchPopover.classList.remove('open'); });
 calendarStatusFilter.addEventListener('change', () => { state.calendarStatus = calendarStatusFilter.value; renderCalendar(); });
 boardStatusFilter.addEventListener('change', () => { state.boardStatus = boardStatusFilter.value; renderCards(); });
 calendarAccountFilter.addEventListener('change', () => { state.calendarAccount = calendarAccountFilter.value; renderCalendar(); });

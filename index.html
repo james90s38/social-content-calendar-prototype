@@ -39,33 +39,25 @@
     </aside>
 
     <main class="main" id="overview">
-      <header class="topbar">
-        <div class="title-row">
+      <header class="app-topbar">
+        <div class="app-title-row">
           <button class="icon-button mobile-only" id="mobileSidebarToggle" title="Open sidebar" aria-label="Open sidebar">
             <i data-icon="menu"></i>
           </button>
           <div>
-            <p class="eyebrow">Social calendar prototype</p>
-            <h1>Plan every post with the preview, date, caption, status, and platform in one place.</h1>
+            <p class="eyebrow">Social calendar</p>
+            <h1>Content Calendar</h1>
           </div>
         </div>
         <div class="topbar-actions">
+          <div class="search-popover" id="searchPopover">
+            <button class="icon-button" id="searchToggle" title="Search" aria-label="Search"><i data-icon="search"></i></button>
+            <label class="search-menu" id="searchMenu"><input id="searchInput" type="search" placeholder="Search videos..." /></label>
+          </div>
           <button class="icon-button" title="Notifications"><i data-icon="bell"></i></button>
           <button class="icon-button" title="Settings"><i data-icon="settings"></i></button>
         </div>
       </header>
-
-      <section class="stats-row" aria-label="Content status summary">
-        <article><i data-icon="check"></i><span>Ready now</span><strong>7</strong><em>2 need caption check</em></article>
-        <article><i data-icon="shield"></i><span>Approved</span><strong>11</strong><em>separated from drafts</em></article>
-        <article><i data-icon="calendar"></i><span>Scheduled</span><strong>5</strong><em>next 7 days</em></article>
-        <article><i data-icon="send"></i><span>Posted</span><strong>24</strong><em>IG / TikTok / X / Reddit</em></article>
-      </section>
-
-      <section class="toolbar" aria-label="Search and filters">
-        <label class="search-wrap"><i data-icon="search"></i><input id="searchInput" type="search" placeholder="Search video, hook, caption, template, platform..." /></label>
-
-      </section>
 
       <section class="calendar-layout" id="calendar">
         <section class="panel calendar-panel" id="calendarPanel">
