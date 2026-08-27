@@ -52,7 +52,6 @@
         <div class="topbar-actions">
           <button class="icon-button" title="Notifications"><i data-icon="bell"></i></button>
           <button class="icon-button" title="Settings"><i data-icon="settings"></i></button>
-          <button class="primary">Add draft video</button>
         </div>
       </header>
 
@@ -65,12 +64,7 @@
 
       <section class="toolbar" aria-label="Search and filters">
         <label class="search-wrap"><i data-icon="search"></i><input id="searchInput" type="search" placeholder="Search video, hook, caption, template, platform..." /></label>
-        <div class="chips" aria-label="Status filters">
-          <button class="chip active" data-status="all">All</button>
-          <button class="chip" data-status="ready">Ready To Post</button>
-          <button class="chip" data-status="scheduled">Scheduled</button>
-          <button class="chip" data-status="posted">Posted</button>
-        </div>
+
       </section>
 
       <section class="calendar-layout" id="calendar">
@@ -81,10 +75,18 @@
               <h2>August posting map</h2>
             </div>
             <div class="calendar-controls">
-              <button id="previewToggle" class="control-button active"><i data-icon="image"></i> Image preview</button>
+              <label class="filter-select section-filter">
+                <span>Calendar status</span>
+                <select id="calendarStatusFilter">
+                  <option value="all">All</option>
+                  <option value="ready">Ready To Post</option>
+                  <option value="scheduled">Scheduled</option>
+                  <option value="posted">Posted</option>
+                </select>
+              </label>
               <div class="zoom-control" aria-label="Calendar zoom">
                 <button id="zoomOut" title="Zoom out">−</button>
-                <span id="zoomLabel">Comfort</span>
+                <span id="zoomLabel">Focus</span>
                 <button id="zoomIn" title="Zoom in">+</button>
               </div>
               <button id="calendarExpand" class="icon-button" title="Open full screen calendar" aria-label="Open full screen calendar"><i data-icon="expand"></i></button>
@@ -100,7 +102,7 @@
       <section class="panel" id="board">
         <div class="panel-head">
           <div><p class="eyebrow">Board / list view</p><h2>Visual content cards</h2></div>
-          <div class="view-tabs"><button class="active">Board</button><button>List</button></div>
+          <div class="board-controls"><label class="filter-select section-filter"><span>Board status</span><select id="boardStatusFilter"><option value="all">All</option><option value="ready">Ready To Post</option><option value="scheduled">Scheduled</option><option value="posted">Posted</option></select></label><div class="view-tabs"><button class="active">Board</button><button>List</button></div></div>
         </div>
         <div class="cards-grid" id="contentCards"></div>
       </section>
