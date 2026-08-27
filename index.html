@@ -84,6 +84,15 @@
                   <option value="posted">Posted</option>
                 </select>
               </label>
+              <label class="filter-select section-filter">
+                <span>Account</span>
+                <select id="calendarAccountFilter">
+                  <option value="all">All accounts</option>
+                  <option value="mari_ken7">mari_ken7</option>
+                  <option value="ai_marie_creator">ai_marie_creator</option>
+                  <option value="artprodesign.2023">artprodesign.2023</option>
+                </select>
+              </label>
               <div class="zoom-control" aria-label="Calendar zoom">
                 <button id="zoomOut" title="Zoom out">−</button>
                 <span id="zoomLabel">Focus</span>
@@ -102,7 +111,7 @@
       <section class="panel" id="board">
         <div class="panel-head">
           <div><p class="eyebrow">Board / list view</p><h2>Visual content cards</h2></div>
-          <div class="board-controls"><label class="filter-select section-filter"><span>Board status</span><select id="boardStatusFilter"><option value="all">All</option><option value="ready">Ready To Post</option><option value="scheduled">Scheduled</option><option value="posted">Posted</option></select></label><div class="view-tabs"><button class="active">Board</button><button>List</button></div></div>
+          <div class="board-controls"><label class="filter-select section-filter"><span>Board status</span><select id="boardStatusFilter"><option value="all">All</option><option value="ready">Ready To Post</option><option value="scheduled">Scheduled</option><option value="posted">Posted</option></select></label><label class="filter-select section-filter"><span>Account</span><select id="boardAccountFilter"><option value="all">All accounts</option><option value="mari_ken7">mari_ken7</option><option value="ai_marie_creator">ai_marie_creator</option><option value="artprodesign.2023">artprodesign.2023</option></select></label><div class="view-tabs"><button class="active">Board</button><button>List</button></div></div>
         </div>
         <div class="cards-grid" id="contentCards"></div>
       </section>

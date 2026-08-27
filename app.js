@@ -19,17 +19,17 @@ document.querySelectorAll('[data-icon]').forEach(el => { el.innerHTML = icons[el
 
 const platformMap = {Instagram:'IG', TikTok:'TT', Pinterest:'PI', X:'X', Reddit:'RD'};
 const items = [
-  {title:'Street Interview Hook',status:'ready',date:'Aug 28',day:28,platforms:['Instagram','TikTok'],template:'Default Hook Title v1',compliance:'Pass',hook:'Why does this feel like a real street interview?',caption:'Realism comes from camera distance, natural pauses, and imperfect street audio. #ai #video #creator #socialmedia #filmmaking',variants:['Why does this feel real?','Why does this feel like a real street interview?'],img:'assets/thumbs/street_interview_hook_aug25.jpg'},
-  {title:'Lip Makeup Hook',status:'ready',date:'Aug 28',day:28,platforms:['Instagram','TikTok'],template:'Default Hook Title v1',compliance:'Pass',hook:'The face detail makes or breaks beauty AI.',caption:'For beauty clips, texture, lighting, and small hand movements matter more than a flashy prompt. #beauty #ai #video #makeup #creator',variants:['Beauty AI Needs Detail','The face detail makes or breaks beauty AI.'],img:'assets/thumbs/lip_makeup_hook_aug25.jpg'},
-  {title:'AI Video Builder',status:'scheduled',date:'Aug 28',day:28,platforms:['Instagram'],template:'Default Hook Title v1',compliance:'Needs check',hook:'Build the shot before generating.',caption:'Write the camera, subject, action, and lighting first. Then generate. #ai #videotools #workflow #content #automation',variants:['Build The Shot First','Build the shot before generating.'],img:'assets/thumbs/artpro_ai_video_builder_aug23.jpg'},
-  {title:'Dragon Product Ad',status:'posted',date:'Aug 22',day:22,platforms:['Instagram','Pinterest'],template:'Default Hook Title v1',compliance:'Pass',hook:'A product ad needs one impossible image.',caption:'Surreal ads work best when the product still stays readable. #advertising #aiart #productvideo #design #creative',variants:['Impossible Product Ad','A product ad needs one impossible image.'],img:'assets/thumbs/perfume_dragon_ad.jpg'},
-  {title:'GTA Free Roam Test',status:'ready',date:'Aug 30',day:30,platforms:['Instagram','TikTok'],template:'Bahnschrift gameplay overlay',compliance:'Pass',hook:'This is the framing that feels like gameplay.',caption:'Third-person framing makes AI game footage feel more believable than cinematic angles. #gaming #ai #gta #video #creator',variants:['Gameplay Framing','This is the framing that feels like gameplay.'],img:'assets/thumbs/gta_seedance_top_overlay.jpg'},
-  {title:'Caesar Rubicon Trap',status:'scheduled',date:'Sep 02',day:2,platforms:['X','Reddit'],template:'Default Hook Title v1',compliance:'Needs check',hook:'History is easier to remember as a trap.',caption:'Draft caption waiting for approval.',variants:['History As A Trap','History is easier to remember as a trap.'],img:'assets/thumbs/caesar_rubicon_trap.jpg'},
-  {title:'Noki Prompt Below Title',status:'ready',date:'Sep 04',day:4,platforms:['Instagram'],template:'Prompt below title',compliance:'Failed',hook:'The prompt should not fight the image.',caption:'When the overlay is too busy, the viewer stops watching the video. #design #ai #videoediting #socialmedia #creator',variants:['Prompt Below Title','The prompt should not fight the image.'],img:'assets/thumbs/noki_prompt_below_title.jpg'},
-  {title:'Dragon Vertical Edit',status:'posted',date:'Aug 24',day:24,platforms:['TikTok','Pinterest'],template:'Default Hook Title v1',compliance:'Pass',hook:'Vertical crops decide the whole ad.',caption:'A good vertical crop keeps the subject, motion, and title readable at the same time. #tiktok #pinterest #video #design #ads',variants:['Vertical Crop Test','Vertical crops decide the whole ad.'],img:'assets/thumbs/dragons_rotated_vertical.jpg'}
+  {title:'Street Interview Hook',account:'mari_ken7',status:'ready',date:'Aug 28',day:28,platforms:['Instagram','TikTok'],template:'Default Hook Title v1',compliance:'Pass',hook:'Why does this feel like a real street interview?',caption:'Realism comes from camera distance, natural pauses, and imperfect street audio. #ai #video #creator #socialmedia #filmmaking',variants:['Why does this feel real?','Why does this feel like a real street interview?'],img:'assets/thumbs/street_interview_hook_aug25.jpg'},
+  {title:'Lip Makeup Hook',account:'mari_ken7',status:'ready',date:'Aug 28',day:28,platforms:['Instagram','TikTok'],template:'Default Hook Title v1',compliance:'Pass',hook:'The face detail makes or breaks beauty AI.',caption:'For beauty clips, texture, lighting, and small hand movements matter more than a flashy prompt. #beauty #ai #video #makeup #creator',variants:['Beauty AI Needs Detail','The face detail makes or breaks beauty AI.'],img:'assets/thumbs/lip_makeup_hook_aug25.jpg'},
+  {title:'AI Video Builder',account:'artprodesign.2023',status:'scheduled',date:'Aug 28',day:28,platforms:['Instagram'],template:'Default Hook Title v1',compliance:'Needs check',hook:'Build the shot before generating.',caption:'Write the camera, subject, action, and lighting first. Then generate. #ai #videotools #workflow #content #automation',variants:['Build The Shot First','Build the shot before generating.'],img:'assets/thumbs/artpro_ai_video_builder_aug23.jpg'},
+  {title:'Dragon Product Ad',account:'artprodesign.2023',status:'posted',date:'Aug 22',day:22,platforms:['Instagram','Pinterest'],template:'Default Hook Title v1',compliance:'Pass',hook:'A product ad needs one impossible image.',caption:'Surreal ads work best when the product still stays readable. #advertising #aiart #productvideo #design #creative',variants:['Impossible Product Ad','A product ad needs one impossible image.'],img:'assets/thumbs/perfume_dragon_ad.jpg'},
+  {title:'GTA Free Roam Test',account:'ai_marie_creator',status:'ready',date:'Aug 30',day:30,platforms:['Instagram','TikTok'],template:'Bahnschrift gameplay overlay',compliance:'Pass',hook:'This is the framing that feels like gameplay.',caption:'Third-person framing makes AI game footage feel more believable than cinematic angles. #gaming #ai #gta #video #creator',variants:['Gameplay Framing','This is the framing that feels like gameplay.'],img:'assets/thumbs/gta_seedance_top_overlay.jpg'},
+  {title:'Caesar Rubicon Trap',account:'ai_marie_creator',status:'scheduled',date:'Sep 02',day:2,platforms:['X','Reddit'],template:'Default Hook Title v1',compliance:'Needs check',hook:'History is easier to remember as a trap.',caption:'Draft caption waiting for approval.',variants:['History As A Trap','History is easier to remember as a trap.'],img:'assets/thumbs/caesar_rubicon_trap.jpg'},
+  {title:'Noki Prompt Below Title',account:'artprodesign.2023',status:'ready',date:'Sep 04',day:4,platforms:['Instagram'],template:'Prompt below title',compliance:'Failed',hook:'The prompt should not fight the image.',caption:'When the overlay is too busy, the viewer stops watching the video. #design #ai #videoediting #socialmedia #creator',variants:['Prompt Below Title','The prompt should not fight the image.'],img:'assets/thumbs/noki_prompt_below_title.jpg'},
+  {title:'Dragon Vertical Edit',account:'artprodesign.2023',status:'posted',date:'Aug 24',day:24,platforms:['TikTok','Pinterest'],template:'Default Hook Title v1',compliance:'Pass',hook:'Vertical crops decide the whole ad.',caption:'A good vertical crop keeps the subject, motion, and title readable at the same time. #tiktok #pinterest #video #design #ads',variants:['Vertical Crop Test','Vertical crops decide the whole ad.'],img:'assets/thumbs/dragons_rotated_vertical.jpg'}
 ];
 
-const state = { calendarStatus:'all', boardStatus:'all', zoom:2, query:'' };
+const state = { calendarStatus:'all', boardStatus:'all', calendarAccount:'all', boardAccount:'all', zoom:2, query:'' };
 const zoomNames = ['Compact', 'Comfort', 'Focus', 'Focus+'];
 const zoomClasses = ['zoom-compact', 'zoom-comfort', 'zoom-focus', 'zoom-ultra'];
 const calendarDays = [27,28,29,30,31,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
@@ -47,6 +47,8 @@ const sidebarToggle = document.getElementById('sidebarToggle');
 const mobileSidebarToggle = document.getElementById('mobileSidebarToggle');
 const calendarStatusFilter = document.getElementById('calendarStatusFilter');
 const boardStatusFilter = document.getElementById('boardStatusFilter');
+const calendarAccountFilter = document.getElementById('calendarAccountFilter');
+const boardAccountFilter = document.getElementById('boardAccountFilter');
 
 function cls(v){return v === 'Pass' ? '' : v === 'Needs check' ? 'warn' : 'bad';}
 function platformHtml(a){return a.map(p=>`<span class="platform platform-${p.toLowerCase().replaceAll(' ','-')}">${platformMap[p] || p}</span>`).join('');}
@@ -56,7 +58,13 @@ function matchesStatus(item, section){
   const s = section === 'calendar' ? state.calendarStatus : state.boardStatus;
   return s === 'all' || item.status === s;
 }
-function sectionItems(section){return items.filter(item => matchesQuery(item) && matchesStatus(item, section));}
+function matchesAccount(item, section){
+  const a = section === 'calendar' ? state.calendarAccount : state.boardAccount;
+  return a === 'all' || item.account === a;
+}
+function accountLabel(account){ return account === 'artprodesign.2023' ? 'artprodesign' : account; }
+function accountHtml(account){ return `<span class="account-pill">${accountLabel(account)}</span>`; }
+function sectionItems(section){return items.filter(item => matchesQuery(item) && matchesStatus(item, section) && matchesAccount(item, section));}
 
 function renderCards(){
   contentCards.innerHTML = '';
@@ -68,7 +76,7 @@ function renderCards(){
           <div class="preview"><img src="${it.img}" alt="${it.title} preview"><span class="badge ${it.status}">${statusLabel(it.status)}</span></div>
           <div class="card-body">
             <div class="card-top"><h3>${it.title}</h3><span class="date-text">${it.date}</span></div>
-            <div class="platforms">${platformHtml(it.platforms)}</div>
+            <div class="platforms">${platformHtml(it.platforms)}${accountHtml(it.account)}</div>
             <div class="meta">
               <span><strong>Hook:</strong> ${it.hook}</span>
               <span><strong>Template:</strong> ${it.template}</span>
@@ -96,7 +104,7 @@ function renderCalendar(){
             <div class="cal-event" data-index="${items.indexOf(it)}">
               <img src="${it.img}" alt="${it.title}">
               <div class="cal-title"><span class="dot ${it.status}"></span><span>${it.title}</span></div>
-              <div class="cal-footer"><span class="cal-status ${it.status}">${statusLabel(it.status)}</span><span class="cal-platforms">${platformHtml(it.platforms)}</span></div>
+              <div class="cal-footer"><span class="cal-status ${it.status}">${statusLabel(it.status)}</span><span class="cal-platforms">${platformHtml(it.platforms)}</span></div><div class="cal-account">${accountLabel(it.account)}</div>
             </div>`).join('')}
         </div>
       </button>`);
@@ -107,12 +115,12 @@ function renderCalendar(){
 function openModal(html){ modalContent.innerHTML = html; modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); }
 function closeModal(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
 function renderItemDetail(item){
-  openModal(`<p class="eyebrow">${statusLabel(item.status)} / ${item.date}</p><h2>${item.title}</h2><img class="detail-img" src="${item.img}" alt="${item.title}"><div class="platforms">${platformHtml(item.platforms)}</div><div class="detail-section"><h4>Hook/title</h4><p>${item.hook}</p></div><div class="detail-section"><h4>Caption</h4><p>${item.caption}</p></div><div class="detail-section"><h4>Template + compliance</h4><p>${item.template} — ${item.compliance}</p></div><div class="detail-section"><h4>Title variant history</h4><p>${item.variants.join(' → ')}</p></div>`);
+  openModal(`<p class="eyebrow">${statusLabel(item.status)} / ${item.date}</p><h2>${item.title}</h2><img class="detail-img" src="${item.img}" alt="${item.title}"><div class="platforms">${platformHtml(item.platforms)}${accountHtml(item.account)}</div><div class="detail-section"><h4>Hook/title</h4><p>${item.hook}</p></div><div class="detail-section"><h4>Caption</h4><p>${item.caption}</p></div><div class="detail-section"><h4>Template + compliance</h4><p>${item.template} — ${item.compliance}</p></div><div class="detail-section"><h4>Title variant history</h4><p>${item.variants.join(' → ')}</p></div>`);
 }
 function renderDayDetail(day){
   const dayItems = sectionItems('calendar').filter(item => item.day === day);
   if (dayItems.length === 1) return renderItemDetail(dayItems[0]);
-  openModal(`<p class="eyebrow">Calendar day</p><h2>Day ${day}</h2><div class="day-modal-grid">${dayItems.length ? dayItems.map(item => `<article class="day-modal-item"><img src="${item.img}" alt="${item.title}"><div><strong>${item.title}</strong><span>${statusLabel(item.status)} · ${item.date}</span><div class="platforms">${platformHtml(item.platforms)}</div><p>${item.hook}</p></div></article>`).join('') : '<p class="empty-state">No items on this day for the current filter.</p>'}</div>`);
+  openModal(`<p class="eyebrow">Calendar day</p><h2>Day ${day}</h2><div class="day-modal-grid">${dayItems.length ? dayItems.map(item => `<article class="day-modal-item"><img src="${item.img}" alt="${item.title}"><div><strong>${item.title}</strong><span>${statusLabel(item.status)} · ${item.date}</span><div class="platforms">${platformHtml(item.platforms)}${accountHtml(item.account)}</div><p>${item.hook}</p></div></article>`).join('') : '<p class="empty-state">No items on this day for the current filter.</p>'}</div>`);
 }
 function renderTemplateDetail(){
   openModal(`<p class="eyebrow">Approved template</p><h2>Black background title template</h2><img class="detail-img" src="assets/thumbs/street_interview_hook_aug25.jpg" alt="Approved template preview"><div class="detail-section"><h4>Layout</h4><p>Black background, rounded-corner inset video, title above the video, and “Read The Caption” below.</p></div><div class="detail-section"><h4>Use rule</h4><p>This is the locked default style unless a new direction is explicitly approved.</p></div>`);
@@ -125,6 +133,8 @@ renderCards(); renderCalendar();
 searchInput.addEventListener('input', () => { state.query = searchInput.value; rerender(); });
 calendarStatusFilter.addEventListener('change', () => { state.calendarStatus = calendarStatusFilter.value; renderCalendar(); });
 boardStatusFilter.addEventListener('change', () => { state.boardStatus = boardStatusFilter.value; renderCards(); });
+calendarAccountFilter.addEventListener('change', () => { state.calendarAccount = calendarAccountFilter.value; renderCalendar(); });
+boardAccountFilter.addEventListener('change', () => { state.boardAccount = boardAccountFilter.value; renderCards(); });
 document.getElementById('zoomOut').addEventListener('click', () => setZoom(state.zoom - 1));
 document.getElementById('zoomIn').addEventListener('click', () => setZoom(state.zoom + 1));
 document.getElementById('calendarExpand').addEventListener('click', async () => { if (document.fullscreenElement) await document.exitFullscreen(); else await calendarPanel.requestFullscreen(); });
