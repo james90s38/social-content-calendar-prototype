@@ -64,8 +64,9 @@ function matchesAccount(item, section){
   const a = section === 'calendar' ? state.calendarAccount : state.boardAccount;
   return a === 'all' || item.account === a;
 }
-function accountLabel(account){ return account === 'artprodesign.2023' ? 'artprodesign' : account; }
-function accountHtml(account){ return `<span class="account-pill">${accountLabel(account)}</span>`; }
+function accountLabel(account){ return account; }
+function accountHtml(account){ return `<span class="account-pill"><i class="fa-solid fa-user"></i>${accountLabel(account)}</span>`; }
+function platformNameHtml(a){return a.map(p=>`<span class="platform-name platform-${p.toLowerCase().replaceAll(' ','-')}"><i class="fa-brands fa-${platformMap[p] || 'circle'}"></i>${p}</span>`).join('');}
 function sectionItems(section){return items.filter(item => matchesQuery(item) && matchesStatus(item, section) && matchesAccount(item, section));}
 
 function renderCards(){
@@ -116,12 +117,12 @@ function renderCalendar(){
 function openModal(html){ modalContent.innerHTML = html; modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); }
 function closeModal(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
 function renderItemDetail(item){
-  openModal(`<p class="eyebrow">${statusLabel(item.status)} / ${item.date}</p><h2>${item.title}</h2><img class="detail-img" src="${item.img}" alt="${item.title}"><div class="platforms">${platformHtml(item.platforms)}${accountHtml(item.account)}</div><div class="detail-section"><h4>Hook/title</h4><p>${item.hook}</p></div><div class="detail-section"><h4>Caption</h4><p>${item.caption}</p></div><div class="detail-section"><h4>Template + compliance</h4><p>${item.template} — ${item.compliance}</p></div><div class="detail-section"><h4>Title variant history</h4><p>${item.variants.join(' → ')}</p></div>`);
+  openModal(`<p class="eyebrow">${statusLabel(item.status)} / ${item.date}</p><h2>${item.title}</h2><img class="detail-img" src="${item.img}" alt="${item.title}"><div class="platforms platform-name-row">${platformNameHtml(item.platforms)}${accountHtml(item.account)}</div><div class="detail-section"><h4>Hook/title</h4><p>${item.hook}</p></div><div class="detail-section"><h4>Caption</h4><p>${item.caption}</p></div><div class="detail-section"><h4>Template + compliance</h4><p>${item.template} — ${item.compliance}</p></div><div class="detail-section"><h4>Title variant history</h4><p>${item.variants.join(' → ')}</p></div>`);
 }
 function renderDayDetail(day){
   const dayItems = sectionItems('calendar').filter(item => item.day === day);
   if (dayItems.length === 1) return renderItemDetail(dayItems[0]);
-  openModal(`<p class="eyebrow">Calendar day</p><h2>Day ${day}</h2><div class="day-modal-grid">${dayItems.length ? dayItems.map(item => `<article class="day-modal-item"><img src="${item.img}" alt="${item.title}"><div><strong>${item.title}</strong><span>${statusLabel(item.status)} · ${item.date}</span><div class="platforms">${platformHtml(item.platforms)}${accountHtml(item.account)}</div><p>${item.hook}</p></div></article>`).join('') : '<p class="empty-state">No items on this day for the current filter.</p>'}</div>`);
+  openModal(`<p class="eyebrow">Calendar day</p><h2>Day ${day}</h2><div class="day-modal-grid">${dayItems.length ? dayItems.map(item => `<article class="day-modal-item"><img src="${item.img}" alt="${item.title}"><div><strong>${item.title}</strong><span>${statusLabel(item.status)} · ${item.date}</span><div class="platforms platform-name-row">${platformNameHtml(item.platforms)}${accountHtml(item.account)}</div><p>${item.hook}</p></div></article>`).join('') : '<p class="empty-state">No items on this day for the current filter.</p>'}</div>`);
 }
 function renderTemplateDetail(){
   openModal(`<p class="eyebrow">Approved template</p><h2>Black background title template</h2><img class="detail-img" src="assets/thumbs/street_interview_hook_aug25.jpg" alt="Approved template preview"><div class="detail-section"><h4>Layout</h4><p>Black background, rounded-corner inset video, title above the video, and “Read The Caption” below.</p></div><div class="detail-section"><h4>Use rule</h4><p>This is the locked default style unless a new direction is explicitly approved.</p></div>`);
