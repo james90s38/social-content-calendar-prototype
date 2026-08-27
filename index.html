@@ -29,6 +29,7 @@
         <a href="#calendar"><i data-icon="calendar"></i> Calendar</a>
         <a href="#board"><i data-icon="cards"></i> Board</a>
         <a href="#posted"><i data-icon="library"></i> Posted library</a>
+        <a href="#kie-library"><i data-icon="image"></i> KIE library</a>
         <a href="#templates"><i data-icon="spark"></i> Template</a>
         <a href="#settings"><i data-icon="settings"></i> Rules</a>
       </nav>
@@ -136,6 +137,15 @@
       <section class="panel usage-panel" id="posted">
         <div class="panel-head"><div><p class="eyebrow">Usage history</p><h2>Platform / account history</h2></div></div>
         <div class="usage-grid" id="usageGrid" aria-label="Platform and account usage history"></div>
+      </section>
+
+      <section class="panel kie-panel" id="kie-library">
+        <div class="panel-head">
+          <div><p class="eyebrow">Approved content library</p><h2>KIE content library</h2></div>
+          <div class="board-controls"><label class="filter-select section-filter"><span>Library type</span><select id="kieTypeFilter"><option value="all">All</option><option value="reel">Reels</option><option value="carousel">Carousels</option></select></label><a class="external-link" href="https://kie-content-library.vercel.app" target="_blank" rel="noreferrer">Open full library</a></div>
+        </div>
+        <div class="kie-summary"><strong id="kieCount">0</strong><span>approved library projects ready to connect to the calendar workflow</span></div>
+        <div class="kie-grid" id="kieGrid" aria-label="KIE content library projects"></div>
       </section>
     </main>
   </div>

@@ -17,6 +17,172 @@ const icons = {
 };
 document.querySelectorAll('[data-icon]').forEach(el => { el.innerHTML = icons[el.dataset.icon] || ''; });
 
+const kieProjects = [
+  {
+    "slug": "perfume-dragon-ad",
+    "title": "Perfume Dragon Ad",
+    "type": "reel",
+    "status": "approved",
+    "format": "Instagram Reel",
+    "theme": "User-provided ready-made ad video",
+    "summary": "User-provided perfume dragon ad video. Only the MP4 video was published; uploaded assets/images were intentionally excluded.",
+    "cover": "assets/thumbs/perfume_dragon_ad.jpg",
+    "tags": [
+      "reel",
+      "approved",
+      "ad",
+      "perfume",
+      "dragon",
+      "user-provided"
+    ],
+    "video": "assets/media/reel-perfume-dragon-ad/01_perfume_dragon_ad.mp4",
+    "downloads": [
+      {
+        "label": "Download video MP4",
+        "href": "assets/media/reel-perfume-dragon-ad/01_perfume_dragon_ad.mp4"
+      }
+    ]
+  },
+  {
+    "slug": "caesar-rubicon-trap-reel",
+    "title": "The Trap Behind Caesar — Rubicon Reel",
+    "type": "reel",
+    "status": "approved",
+    "format": "Instagram Reel",
+    "theme": "AI history documentary / prompt education",
+    "summary": "An 18-second cinematic Black Void history reel explaining why Caesar crossing the Rubicon was a trap: surrender the army or commit treason.",
+    "cover": "assets/kie/caesar-rubicon-trap-reel.png",
+    "tags": [
+      "reel",
+      "approved",
+      "history",
+      "julius-caesar",
+      "rubicon",
+      "ai-video"
+    ],
+    "video": "assets/media/reel-caesar-rubicon-trap/caesar_rubicon_trap_approved_final.mp4",
+    "downloads": [
+      {
+        "label": "Download approved final MP4",
+        "href": "assets/media/reel-caesar-rubicon-trap/caesar_rubicon_trap_approved_final.mp4"
+      },
+      {
+        "label": "Download prompt-below version",
+        "href": "assets/media/reel-caesar-rubicon-trap/caesar_rubicon_trap_prompt_below.mp4"
+      }
+    ]
+  },
+  {
+    "slug": "biomechanical-animals-dark-studio-carousel",
+    "title": "Biomechanical Animals — Dark Studio Carousel",
+    "type": "carousel",
+    "status": "approved",
+    "format": "Instagram Carousel",
+    "theme": "AI creature design / biomechanical animals",
+    "summary": "Five dark-studio biomechanical creature portraits: cyber wolf, albino cyber lion, biomech raven, cyber owl, and polar cyber bear.",
+    "cover": "assets/kie/biomechanical-animals-dark-studio-carousel.png",
+    "tags": [
+      "AI creature design",
+      "biomech",
+      "dark studio",
+      "carousel",
+      "approved"
+    ],
+    "video": "",
+    "downloads": [
+      {
+        "label": "Carousel ZIP",
+        "path": "assets/media/biomechanical-animals-dark-studio-carousel/biomechanical_animals_dark_studio_carousel.zip"
+      },
+      {
+        "label": "Caption",
+        "path": "assets/media/biomechanical-animals-dark-studio-carousel/CAPTION.md"
+      }
+    ]
+  },
+  {
+    "slug": "same-character-different-worlds",
+    "title": "5 AI Style Prompts — Same Character, Different Worlds",
+    "type": "carousel",
+    "status": "approved",
+    "format": "Instagram Carousel",
+    "theme": "Beige editorial showcase",
+    "summary": "A curated 6-slide carousel: cover plus five stylized worlds built from the same character concept.",
+    "cover": "assets/kie/same-character-different-worlds.png",
+    "tags": [
+      "carousel",
+      "approved",
+      "character",
+      "style-prompts",
+      "instagram"
+    ],
+    "video": "",
+    "downloads": [
+      {
+        "label": "Download carousel ZIP",
+        "href": "assets/media/carousel-ai-style/final_bahnschrift_carousel.zip"
+      }
+    ]
+  },
+  {
+    "slug": "seedance-gta-egypt-china-reel",
+    "title": "Seedance 2 GTA Style — Egypt + Great Wall Stitched Reel",
+    "type": "reel",
+    "status": "approved",
+    "format": "Instagram Reel",
+    "theme": "Gameplay concept reel",
+    "summary": "Two approved Seedance 2 Mini gameplay tests stitched into a single reel, with downloadable video, prompt-layout version, source bundles, and combined prompt.",
+    "cover": "assets/kie/seedance-gta-egypt-china-reel.png",
+    "tags": [
+      "reel",
+      "approved",
+      "seedance-2-mini",
+      "gta-style",
+      "egypt",
+      "china"
+    ],
+    "video": "assets/media/reel-seedance-gta/egypt_china_stitched_no_transition.mp4",
+    "downloads": [
+      {
+        "label": "Download stitched reel MP4",
+        "href": "assets/media/reel-seedance-gta/egypt_china_stitched_no_transition.mp4"
+      },
+      {
+        "label": "Download prompt-layout reel MP4",
+        "href": "assets/media/reel-seedance-gta/egypt_china_stitched_prompt_below_seedance2_gta_style.mp4"
+      }
+    ]
+  },
+  {
+    "slug": "ai-video-realism-carousel",
+    "title": "How to Make AI Videos Look Real",
+    "type": "carousel",
+    "status": "approved",
+    "format": "Instagram Carousel",
+    "theme": "AI realism prompt education",
+    "summary": "A 7-slide educational carousel teaching the realism stack for AI video: skin detail, lighting, camera motion, materials, and imperfect environments.",
+    "cover": "assets/kie/ai-video-realism-carousel.png",
+    "tags": [
+      "carousel",
+      "approved",
+      "ai-video",
+      "realism",
+      "prompt-guide",
+      "instagram"
+    ],
+    "video": "",
+    "downloads": [
+      {
+        "label": "Download carousel ZIP",
+        "href": "assets/media/carousel-ai-video-realism/how_to_make_ai_videos_look_real_carousel.zip"
+      },
+      {
+        "label": "Download realism prompt TXT",
+        "href": "assets/media/carousel-ai-video-realism/realism_stack_prompt.txt"
+      }
+    ]
+  }
+];
 const platformMap = {Instagram:'instagram', TikTok:'tiktok', Pinterest:'pinterest-p', X:'x-twitter', Reddit:'reddit-alien'};
 const items = [
   {title:'Street Interview Hook',account:'mari_ken7',status:'ready',date:'Aug 28',day:28,platforms:['Instagram','TikTok'],template:'Default Hook Title v1',compliance:'Pass',hook:'Why does this feel like a real street interview?',caption:'Realism comes from camera distance, natural pauses, and imperfect street audio. #ai #video #creator #socialmedia #filmmaking',variants:['Why does this feel real?','Why does this feel like a real street interview?'],img:'assets/thumbs/street_interview_hook_aug25.jpg'},
@@ -70,6 +236,9 @@ const templatePagination = document.getElementById('templatePagination');
 const workflowBoard = document.getElementById('workflowBoard');
 const templateHistory = document.getElementById('templateHistory');
 const usageGrid = document.getElementById('usageGrid');
+const kieGrid = document.getElementById('kieGrid');
+const kieTypeFilter = document.getElementById('kieTypeFilter');
+const kieCount = document.getElementById('kieCount');
 const monthViewBtn = document.getElementById('monthViewBtn');
 const weekViewBtn = document.getElementById('weekViewBtn');
 const prevPeriod = document.getElementById('prevPeriod');
@@ -119,6 +288,23 @@ function renderUsageHistory(){
     const upcoming = accountItems.filter(item => item.status !== 'posted').length;
     return `<article class="usage-card"><div class="usage-head"><strong>${account}</strong><span>${posted} posted · ${upcoming} upcoming</span></div><div class="platform-name-row">${platformNameHtml(usedPlatforms)}</div><ul>${accountItems.slice(0,4).map(item => `<li><span class="dot ${item.status}"></span><b>${statusLabel(item.status)}</b><em>${item.date}</em><p>${item.title}</p></li>`).join('')}</ul></article>`;
   }).join('');
+}
+
+
+function renderKieLibrary(){
+  const type = kieTypeFilter.value;
+  const filtered = kieProjects.filter(project => type === 'all' || project.type === type);
+  kieCount.textContent = filtered.length;
+  kieGrid.innerHTML = filtered.map(project => `<article class="kie-card" data-slug="${project.slug}">
+    <button class="kie-card-button" aria-label="Open ${project.title} library details">
+      <div class="kie-cover"><img src="${project.cover}" alt="${project.title} cover"><span class="badge approved">${project.status}</span></div>
+      <div class="kie-body"><div class="card-top"><h3>${project.title}</h3><span class="date-text">${project.type}</span></div><p>${project.summary}</p><div class="tag-row">${project.tags.map(tag=>`<span>${tag}</span>`).join('')}</div><div class="card-actions card-actions-right"><span class="open-detail">Library details</span></div></div>
+    </button>
+  </article>`).join('');
+}
+function renderKieDetail(project){
+  const downloadHtml = project.downloads.length ? project.downloads.map(d => `<a href="https://kie-content-library.vercel.app/${d.href}" target="_blank" rel="noreferrer">${d.label}</a>`).join('') : '<span>No direct download listed</span>';
+  openModal(`<p class="eyebrow">KIE content library / ${project.type}</p><h2>${project.title}</h2><img class="detail-img" src="${project.cover}" alt="${project.title} cover"><div class="detail-section"><h4>Summary</h4><p>${project.summary}</p></div><div class="detail-section"><h4>Format + theme</h4><p>${project.format || 'Content asset'} — ${project.theme || 'Approved library item'}</p></div><div class="detail-section"><h4>Tags</h4><div class="tag-row detail-tags">${project.tags.map(tag=>`<span>${tag}</span>`).join('')}</div></div><div class="detail-section library-links"><h4>Library links</h4><a href="https://kie-content-library.vercel.app#${project.slug}" target="_blank" rel="noreferrer">Open in full KIE library</a>${downloadHtml}</div>`);
 }
 
 function renderCards(){
@@ -209,7 +395,7 @@ function renderDayDetail(day){
 function renderTemplateDetail(template = templates[state.templatePage - 1]){
   openModal(`<p class="eyebrow">Approved template</p><h2>${template.title}</h2><img class="detail-img" src="${template.img}" alt="${template.title} preview"><div class="detail-section"><h4>Template status</h4><p>${template.status}</p></div><div class="detail-section"><h4>Version history</h4><ol class="version-list modal-version-list">${template.versions.map((entry, idx) => `<li class="${idx === template.versions.length - 1 ? 'current' : ''}"><span>${entry.v}</span><div><strong>${entry.label}</strong><p>${entry.note}</p></div></li>`).join('')}</ol></div><div class="detail-section"><h4>Use rule</h4><p>This is the locked default style unless a new direction is explicitly approved.</p></div>`);
 }
-function rerender(){state.boardPage=1;renderWorkflowBoard();renderCards();renderCalendar();renderTemplatePager();renderUsageHistory();}
+function rerender(){state.boardPage=1;renderWorkflowBoard();renderCards();renderCalendar();renderTemplatePager();renderUsageHistory();renderKieLibrary();}
 function setZoom(next){ state.zoom = Math.max(0, Math.min(4, next)); renderCalendar(); }
 function setCalendarView(view){ state.calendarView = view; renderCalendar(); }
 function shiftPeriod(delta){ if (state.calendarView === 'week') state.weekIndex = Math.max(0, Math.min(totalWeeks - 1, state.weekIndex + delta)); renderCalendar(); }
@@ -219,7 +405,7 @@ function closeMobileSidebar(){ document.body.classList.remove('mobile-sidebar-op
 function toggleSidebar(){ isMobileNav() ? openMobileSidebar() : document.body.classList.toggle('sidebar-collapsed'); }
 
 if (window.matchMedia('(max-width: 760px)').matches) state.calendarView = 'week';
-renderWorkflowBoard(); renderCards(); renderCalendar(); renderTemplatePager(); renderUsageHistory();
+renderWorkflowBoard(); renderCards(); renderCalendar(); renderTemplatePager(); renderUsageHistory(); renderKieLibrary();
 searchInput.addEventListener('input', () => { state.query = searchInput.value; rerender(); });
 searchToggle.addEventListener('click', () => { searchPopover.classList.toggle('open'); if (searchPopover.classList.contains('open')) searchInput.focus(); });
 document.addEventListener('click', e => { if (!searchPopover.contains(e.target)) searchPopover.classList.remove('open'); });
@@ -248,3 +434,6 @@ mobileSidebarClose.addEventListener('click', closeMobileSidebar);
 sidebarBackdrop.addEventListener('click', closeMobileSidebar);
 document.querySelectorAll('.nav-list a').forEach(link => link.addEventListener('click', () => { if (isMobileNav()) closeMobileSidebar(); }));
 window.addEventListener('resize', () => { if (!isMobileNav()) closeMobileSidebar(); });
+
+kieTypeFilter.addEventListener('change', renderKieLibrary);
+kieGrid.addEventListener('click', e => { const card=e.target.closest('.kie-card'); if(card) renderKieDetail(kieProjects.find(project => project.slug === card.dataset.slug)); });
