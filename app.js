@@ -35,11 +35,14 @@ const templates = [
   {title:'Prompt Below Title', cta:'Review Caption', img:'assets/thumbs/noki_prompt_below_title.jpg', status:'Prompt-below-title variant'}
 ];
 
-const state = { calendarStatus:'all', boardStatus:'all', calendarAccount:'all', boardAccount:'all', zoom:2, query:'', boardPage:1, boardPageSize:6, templatePage:1 };
+const state = { calendarStatus:'all', boardStatus:'all', calendarAccount:'all', boardAccount:'all', zoom:2, query:'', boardPage:1, boardPageSize:6, templatePage:1, calendarView:'month', weekIndex:0 };
 const zoomNames = ['Compact', 'Comfort', 'Roomy', 'Focus', 'Focus+'];
 const zoomClasses = ['zoom-compact', 'zoom-comfort', 'zoom-roomy', 'zoom-focus', 'zoom-ultra'];
 const calendarDays = [27,28,29,30,31,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
 const dayNames = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const totalWeeks = Math.ceil(calendarDays.length / 7);
+function dayMonth(index){ return index <= 4 ? 'Aug' : 'Sep'; }
+function dayLabel(day, index){ return `${dayMonth(index)} ${day}`; }
 
 const searchInput = document.getElementById('searchInput');
 const contentCards = document.getElementById('contentCards');
@@ -62,6 +65,11 @@ const searchPopover = document.getElementById('searchPopover');
 const boardPagination = document.getElementById('boardPagination');
 const templatePagerSlot = document.getElementById('templatePagerSlot');
 const templatePagination = document.getElementById('templatePagination');
+const monthViewBtn = document.getElementById('monthViewBtn');
+const weekViewBtn = document.getElementById('weekViewBtn');
+const prevPeriod = document.getElementById('prevPeriod');
+const nextPeriod = document.getElementById('nextPeriod');
+const periodLabel = document.getElementById('periodLabel');
 
 function cls(v){return v === 'Pass' ? '' : v === 'Needs check' ? 'warn' : 'bad';}
 function platformHtml(a){return a.map(p=>`<span class="platform platform-${p.toLowerCase().replaceAll(' ','-')}" title="${p}" aria-label="${p}"><i class="fa-brands fa-${platformMap[p] || 'circle'}"></i></span>`).join('');}
@@ -121,28 +129,39 @@ function renderTemplatePager(){
   document.getElementById('templatePreviewCard').addEventListener('click', () => renderTemplateDetail(t));
 }
 function renderCalendar(){
-  calendarGrid.className = `calendar-grid ${zoomClasses[state.zoom]}`;
+  const isWeek = state.calendarView === 'week';
+  calendarGrid.className = `calendar-grid ${zoomClasses[state.zoom]} ${isWeek ? 'week-view' : 'month-view'}`;
   calendarGrid.innerHTML = '';
-  dayNames.forEach(d => calendarGrid.insertAdjacentHTML('beforeend', `<div class="day-name">${d}</div>`));
-  calendarDays.forEach((day, i) => {
-    const muted = i > 30 ? 'muted' : '';
+  const startIndex = isWeek ? state.weekIndex * 7 : 0;
+  const visibleDays = isWeek ? calendarDays.slice(startIndex, startIndex + 7) : calendarDays;
+  if (!isWeek) dayNames.forEach(d => calendarGrid.insertAdjacentHTML('beforeend', `<div class="day-name">${d}</div>`));
+  visibleDays.forEach((day, localIndex) => {
+    const index = startIndex + localIndex;
+    const muted = index > 30 ? 'muted' : '';
     const dayItems = muted ? [] : sectionItems('calendar').filter(item => item.day === day);
     calendarGrid.insertAdjacentHTML('beforeend', `
-      <button class="day ${muted} ${dayItems.length ? 'has-events' : ''} ${dayItems.length > 1 ? 'multi-events' : ''}" data-day="${day}" aria-label="Open day ${day}">
-        <div class="day-head"><span class="day-number">${day}</span><span class="day-count">${dayItems.length ? `${dayItems.length} item${dayItems.length>1?'s':''}` : ''}</span></div>
+      <button class="day ${muted} ${dayItems.length ? 'has-events' : ''} ${dayItems.length > 1 ? 'multi-events' : ''}" data-day="${day}" aria-label="Open ${dayLabel(day,index)}">
+        <div class="day-head"><span class="day-number">${dayLabel(day,index)}</span><span class="day-count">${dayItems.length ? `${dayItems.length} item${dayItems.length>1?'s':''}` : 'No posts'}</span></div>
         <div class="day-events">
           ${dayItems.map(it => `
             <div class="cal-event" data-index="${items.indexOf(it)}">
               <img src="${it.img}" alt="${it.title}">
               <div class="cal-title"><span class="dot ${it.status}"></span><span>${it.title}</span></div>
               <div class="cal-footer"><span class="cal-status ${it.status}">${statusLabel(it.status)}</span><span class="cal-platforms">${platformHtml(it.platforms)}</span></div><div class="cal-account">${accountLabel(it.account)}</div>
-            </div>`).join('')}
+            </div>`).join('') || '<p class="empty-day">Nothing scheduled</p>'}
         </div>
       </button>`);
   });
   zoomLabel.textContent = zoomNames[state.zoom];
+  monthViewBtn.classList.toggle('active', !isWeek);
+  weekViewBtn.classList.toggle('active', isWeek);
+  if (isWeek) {
+    const endIndex = Math.min(startIndex + visibleDays.length - 1, calendarDays.length - 1);
+    periodLabel.textContent = `${dayLabel(calendarDays[startIndex], startIndex)} – ${dayLabel(calendarDays[endIndex], endIndex)}`;
+  } else {
+    periodLabel.textContent = 'Aug 2026';
+  }
 }
-
 function openModal(html){ modalContent.innerHTML = html; modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); }
 function closeModal(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
 function renderItemDetail(item){
@@ -158,11 +177,14 @@ function renderTemplateDetail(template = templates[state.templatePage - 1]){
 }
 function rerender(){state.boardPage=1;renderCards();renderCalendar();renderTemplatePager();}
 function setZoom(next){ state.zoom = Math.max(0, Math.min(4, next)); renderCalendar(); }
+function setCalendarView(view){ state.calendarView = view; renderCalendar(); }
+function shiftPeriod(delta){ if (state.calendarView === 'week') state.weekIndex = Math.max(0, Math.min(totalWeeks - 1, state.weekIndex + delta)); renderCalendar(); }
 function isMobileNav(){ return window.matchMedia('(max-width: 1180px)').matches; }
 function openMobileSidebar(){ document.body.classList.add('mobile-sidebar-open'); }
 function closeMobileSidebar(){ document.body.classList.remove('mobile-sidebar-open'); }
 function toggleSidebar(){ isMobileNav() ? openMobileSidebar() : document.body.classList.toggle('sidebar-collapsed'); }
 
+if (window.matchMedia('(max-width: 760px)').matches) state.calendarView = 'week';
 renderCards(); renderCalendar(); renderTemplatePager();
 searchInput.addEventListener('input', () => { state.query = searchInput.value; rerender(); });
 searchToggle.addEventListener('click', () => { searchPopover.classList.toggle('open'); if (searchPopover.classList.contains('open')) searchInput.focus(); });
@@ -173,6 +195,10 @@ calendarAccountFilter.addEventListener('change', () => { state.calendarAccount =
 boardAccountFilter.addEventListener('change', () => { state.boardAccount = boardAccountFilter.value; state.boardPage = 1; renderCards(); });
 boardPagination.addEventListener('click', e => { const b=e.target.closest('[data-page-action]'); if(!b) return; state.boardPage += b.dataset.pageAction === 'next' ? 1 : -1; renderCards(); });
 templatePagination.addEventListener('click', e => { const b=e.target.closest('[data-page-action]'); if(!b) return; state.templatePage += b.dataset.pageAction === 'next' ? 1 : -1; renderTemplatePager(); });
+monthViewBtn.addEventListener('click', () => setCalendarView('month'));
+weekViewBtn.addEventListener('click', () => setCalendarView('week'));
+prevPeriod.addEventListener('click', () => shiftPeriod(-1));
+nextPeriod.addEventListener('click', () => shiftPeriod(1));
 document.getElementById('zoomOut').addEventListener('click', () => setZoom(state.zoom - 1));
 document.getElementById('zoomIn').addEventListener('click', () => setZoom(state.zoom + 1));
 document.getElementById('calendarExpand').addEventListener('click', async () => { if (document.fullscreenElement) await document.exitFullscreen(); else await calendarPanel.requestFullscreen(); });

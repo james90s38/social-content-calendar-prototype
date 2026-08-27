@@ -90,13 +90,17 @@
                   <option value="artprodesign.2023">artprodesign.2023</option>
                 </select>
               </label>
+              <div class="view-tabs calendar-view-tabs" aria-label="Calendar view">
+                <button id="monthViewBtn" class="active" type="button">Month</button>
+                <button id="weekViewBtn" type="button">Week</button>
+              </div>
               <div class="zoom-control" aria-label="Calendar zoom">
                 <button id="zoomOut" title="Zoom out">−</button>
                 <span id="zoomLabel">Focus</span>
                 <button id="zoomIn" title="Zoom in">+</button>
               </div>
               <button id="calendarExpand" class="icon-button" title="Open full screen calendar" aria-label="Open full screen calendar"><i data-icon="expand"></i></button>
-              <div class="month-switch"><button>‹</button><strong>Aug 2026</strong><button>›</button></div>
+              <div class="month-switch"><button id="prevPeriod" type="button">‹</button><strong id="periodLabel">Aug 2026</strong><button id="nextPeriod" type="button">›</button></div>
             </div>
           </div>
           <div class="calendar-scroll" id="calendarScroll">

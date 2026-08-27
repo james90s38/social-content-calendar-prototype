@@ -107,3 +107,20 @@ svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.8;fill:none;stroke
   .stats-row i{width:26px;height:26px;border-radius:9px}
   .stats-row strong{font-size:24px}.stats-row span{font-size:12px}.stats-row em{font-size:11px;line-height:1.3}
 }
+
+
+/* Calendar month/week view option */
+.calendar-view-tabs button{padding:8px 14px;min-width:74px}.calendar-grid.week-view{grid-template-columns:repeat(4,minmax(220px,1fr));gap:12px}.calendar-grid.week-view .day-name{display:none}.calendar-grid.week-view .day{min-height:260px}.calendar-grid.week-view.zoom-compact .day{min-height:190px}.calendar-grid.week-view.zoom-comfort .day{min-height:230px}.calendar-grid.week-view.zoom-roomy .day{min-height:285px}.calendar-grid.week-view.zoom-focus .day{min-height:340px}.calendar-grid.week-view.zoom-ultra .day{min-height:420px}.empty-day{margin:0;color:#98a2b3;font-size:12px;line-height:1.4;padding:8px;border:1px dashed var(--line);border-radius:12px;background:#fbfcff}.week-view .day-count:empty{display:none}
+@media(max-width:1180px){.calendar-grid.week-view{grid-template-columns:repeat(2,minmax(0,1fr))}.calendar-grid.week-view .day-name{display:none}}
+@media(max-width:760px){
+  .calendar-view-tabs{width:100%;justify-content:center}.calendar-view-tabs button{flex:1}
+  .calendar-grid.week-view,.calendar-grid.week-view.zoom-compact,.calendar-grid.week-view.zoom-comfort,.calendar-grid.week-view.zoom-roomy,.calendar-grid.week-view.zoom-focus,.calendar-grid.week-view.zoom-ultra{grid-template-columns:1fr;gap:9px}
+  .calendar-grid.week-view .day{display:flex!important;min-height:auto!important;padding:10px;border-radius:18px}
+  .calendar-grid.week-view .day:not(.has-events){display:flex!important;background:#fbfcff}
+  .calendar-grid.week-view .day-number::before{content:none!important}
+  .calendar-grid.week-view .day-head{margin-bottom:7px}
+  .calendar-grid.week-view .empty-day{font-size:12px;padding:10px;text-align:center}
+  .calendar-grid.week-view .cal-event{display:grid;grid-template-columns:94px minmax(0,1fr);grid-template-rows:auto auto auto;min-height:112px}
+  .calendar-grid.week-view .cal-event img{width:94px!important;height:112px!important}
+  .calendar-grid.month-view .day-number::before{content:none!important}
+}
