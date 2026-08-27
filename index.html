@@ -6,128 +6,125 @@
   <title>Social Content Calendar Prototype</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="gradient-stage">
-    <div class="dashboard-shell">
-      <aside class="sidebar" aria-label="Workspace navigation">
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Workspace navigation">
+      <div class="brand-row">
         <div class="brand">
           <div class="brand-word">social<span>desk</span></div>
           <small>Content command center</small>
         </div>
-        <nav class="nav-list">
-          <a class="active" href="#overview"><i data-icon="grid"></i> Overview</a>
-          <a href="#calendar"><i data-icon="calendar"></i> Calendar</a>
-          <a href="#board"><i data-icon="cards"></i> Board</a>
-          <a href="#posted"><i data-icon="library"></i> Posted library</a>
-          <a href="#templates"><i data-icon="spark"></i> Templates</a>
-          <a href="#settings"><i data-icon="settings"></i> Rules</a>
-        </nav>
-        <div class="approval-card">
-          <div class="approval-icon"><i data-icon="shield"></i></div>
-          <strong>No surprise posting</strong>
-          <p>Edited, approved, ready, scheduled, and posted stay visually separate.</p>
-        </div>
-      </aside>
+        <button class="icon-button sidebar-toggle desktop-only" id="sidebarToggle" title="Collapse sidebar" aria-label="Collapse sidebar">
+          <i data-icon="panel"></i>
+        </button>
+      </div>
 
-      <main class="main" id="overview">
-        <header class="topbar">
+      <nav class="nav-list">
+        <a class="active" href="#overview"><i data-icon="grid"></i> Overview</a>
+        <a href="#calendar"><i data-icon="calendar"></i> Calendar</a>
+        <a href="#board"><i data-icon="cards"></i> Board</a>
+        <a href="#posted"><i data-icon="library"></i> Posted library</a>
+        <a href="#templates"><i data-icon="spark"></i> Template</a>
+        <a href="#settings"><i data-icon="settings"></i> Rules</a>
+      </nav>
+
+      <div class="approval-card">
+        <div class="approval-icon"><i data-icon="shield"></i></div>
+        <strong>No surprise posting</strong>
+        <p>Edited, approved, ready, scheduled, and posted stay visually separate.</p>
+      </div>
+    </aside>
+
+    <main class="main" id="overview">
+      <header class="topbar">
+        <div class="title-row">
+          <button class="icon-button mobile-only" id="mobileSidebarToggle" title="Open sidebar" aria-label="Open sidebar">
+            <i data-icon="menu"></i>
+          </button>
           <div>
             <p class="eyebrow">Social calendar prototype</p>
             <h1>Plan every post with the preview, date, caption, status, and platform in one place.</h1>
           </div>
-          <div class="topbar-actions">
-            <button class="icon-button" title="Notifications"><i data-icon="bell"></i></button>
-            <button class="icon-button" title="Settings"><i data-icon="settings"></i></button>
-            <button class="primary">Add draft video</button>
-          </div>
-        </header>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-button" title="Notifications"><i data-icon="bell"></i></button>
+          <button class="icon-button" title="Settings"><i data-icon="settings"></i></button>
+          <button class="primary">Add draft video</button>
+        </div>
+      </header>
 
-        <section class="stats-row" aria-label="Content status summary">
-          <article><i data-icon="check"></i><span>Ready now</span><strong>7</strong><em>2 need caption check</em></article>
-          <article><i data-icon="shield"></i><span>Approved</span><strong>11</strong><em>separated from drafts</em></article>
-          <article><i data-icon="calendar"></i><span>Scheduled</span><strong>5</strong><em>next 7 days</em></article>
-          <article><i data-icon="send"></i><span>Posted</span><strong>24</strong><em>IG / TikTok / X / Reddit</em></article>
-        </section>
+      <section class="stats-row" aria-label="Content status summary">
+        <article><i data-icon="check"></i><span>Ready now</span><strong>7</strong><em>2 need caption check</em></article>
+        <article><i data-icon="shield"></i><span>Approved</span><strong>11</strong><em>separated from drafts</em></article>
+        <article><i data-icon="calendar"></i><span>Scheduled</span><strong>5</strong><em>next 7 days</em></article>
+        <article><i data-icon="send"></i><span>Posted</span><strong>24</strong><em>IG / TikTok / X / Reddit</em></article>
+      </section>
 
-        <section class="toolbar" aria-label="Search and filters">
-          <label class="search-wrap"><i data-icon="search"></i><input id="searchInput" type="search" placeholder="Search video, hook, caption, template, platform..." /></label>
-          <div class="chips">
-            <button class="chip active" data-status="all">All</button>
-            <button class="chip" data-status="edited">Edited</button>
-            <button class="chip" data-status="approved">Approved</button>
-            <button class="chip" data-status="ready">Ready</button>
-            <button class="chip" data-status="scheduled">Scheduled</button>
-            <button class="chip" data-status="posted">Posted</button>
-          </div>
-        </section>
+      <section class="toolbar" aria-label="Search and filters">
+        <label class="search-wrap"><i data-icon="search"></i><input id="searchInput" type="search" placeholder="Search video, hook, caption, template, platform..." /></label>
+        <div class="chips" aria-label="Status filters">
+          <button class="chip active" data-status="all">All</button>
+          <button class="chip" data-status="ready">Ready To Post</button>
+          <button class="chip" data-status="scheduled">Scheduled</button>
+          <button class="chip" data-status="posted">Posted</button>
+        </div>
+      </section>
 
-        <section class="calendar-layout" id="calendar">
-          <section class="panel calendar-panel">
-            <div class="panel-head">
-              <div>
-                <p class="eyebrow">Calendar</p>
-                <h2>August posting map</h2>
-              </div>
-              <div class="calendar-controls">
-                <button id="previewToggle" class="control-button active"><i data-icon="image"></i> Image preview</button>
-                <div class="zoom-control" aria-label="Calendar zoom">
-                  <button id="zoomOut" title="Zoom out">−</button>
-                  <span id="zoomLabel">Comfort</span>
-                  <button id="zoomIn" title="Zoom in">+</button>
-                </div>
-                <div class="month-switch"><button>‹</button><strong>Aug 2026</strong><button>›</button></div>
-              </div>
-            </div>
-            <div class="calendar-grid zoom-comfort show-images" id="calendarGrid" aria-label="Monthly calendar"></div>
-          </section>
-
-          <aside class="panel queue-panel">
-            <div class="panel-head small"><div><p class="eyebrow">Next up</p><h2>Recommended queue</h2></div></div>
-            <ol class="queue-list" id="queueList"></ol>
-          </aside>
-        </section>
-
-        <section class="panel" id="board">
+      <section class="calendar-layout" id="calendar">
+        <section class="panel calendar-panel" id="calendarPanel">
           <div class="panel-head">
-            <div><p class="eyebrow">Board / list view</p><h2>Visual content cards</h2></div>
-            <div class="view-tabs"><button class="active">Board</button><button>List</button></div>
-          </div>
-          <div class="cards-grid" id="contentCards"></div>
-        </section>
-
-        <section class="panel template-panel" id="templates">
-          <div class="panel-head"><div><p class="eyebrow">Template tracking</p><h2>Hook-title template compliance</h2></div></div>
-          <div class="template-row">
-            <div class="template-phone">
-              <div class="template-title">Why does this feel real?</div>
-              <img src="assets/thumbs/street_interview_hook_aug25.jpg" alt="Template preview with real video still">
-              <div class="template-cta">Read The Caption</div>
+            <div>
+              <p class="eyebrow">Calendar</p>
+              <h2>August posting map</h2>
             </div>
-            <div class="template-copy">
-              <span class="badge ready">Default approved template</span>
-              <h3>Black hook-title card + rounded video inset</h3>
-              <p>Each video stores which template it uses, whether it follows the approved template, and the hook/title version history.</p>
-              <div class="rule-grid">
-                <span>Template used</span><strong>Default Hook Title v1</strong>
-                <span>Compliance</span><strong>Pass / needs check / failed</strong>
-                <span>Variant history</span><strong>Hook A → Hook B → approved hook</strong>
+            <div class="calendar-controls">
+              <button id="previewToggle" class="control-button active"><i data-icon="image"></i> Image preview</button>
+              <div class="zoom-control" aria-label="Calendar zoom">
+                <button id="zoomOut" title="Zoom out">−</button>
+                <span id="zoomLabel">Comfort</span>
+                <button id="zoomIn" title="Zoom in">+</button>
               </div>
+              <button id="calendarExpand" class="icon-button" title="Open full screen calendar" aria-label="Open full screen calendar"><i data-icon="expand"></i></button>
+              <div class="month-switch"><button>‹</button><strong>Aug 2026</strong><button>›</button></div>
             </div>
           </div>
+          <div class="calendar-scroll" id="calendarScroll">
+            <div class="calendar-grid zoom-comfort show-images" id="calendarGrid" aria-label="Monthly calendar"></div>
+          </div>
         </section>
-      </main>
+      </section>
+
+      <section class="panel" id="board">
+        <div class="panel-head">
+          <div><p class="eyebrow">Board / list view</p><h2>Visual content cards</h2></div>
+          <div class="view-tabs"><button class="active">Board</button><button>List</button></div>
+        </div>
+        <div class="cards-grid" id="contentCards"></div>
+      </section>
+
+      <section class="panel template-panel" id="templates">
+        <div class="panel-head"><div><p class="eyebrow">Template tracking</p><h2>Approved title template</h2></div></div>
+        <button class="template-preview-card" id="templatePreviewCard" aria-label="Open template details popup">
+          <div class="template-phone">
+            <div class="template-title">Why Does This Feel Real?</div>
+            <img src="assets/thumbs/street_interview_hook_aug25.jpg" alt="Template preview with real video still">
+            <div class="template-cta">Read The Caption</div>
+          </div>
+        </button>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Close popup">×</button>
+      <div id="modalContent"></div>
     </div>
   </div>
 
-  <div class="drawer" id="drawer" aria-hidden="true">
-    <div class="drawer-card">
-      <button class="drawer-close" id="drawerClose">×</button>
-      <div id="drawerContent"></div>
-    </div>
-  </div>
   <script src="app.js"></script>
 </body>
 </html>

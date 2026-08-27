@@ -2,3 +2,5 @@ assets/reference/
 live-screenshot.png
 prototype-screenshot.png
 verify-*.png
+node_modules/
+verify-interactions.js
